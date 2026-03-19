@@ -242,10 +242,27 @@
   .test-grade.grade-c { color: var(--amber); }
   .test-grade.grade-f { color: var(--red); }
 
+  /* HAMBURGER */
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; margin-left: auto; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: #fff; margin: 5px 0; border-radius: 2px; transition: all .3s; }
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  .topbar-nav { display: contents; }
+
   @media(max-width:600px){
-    .topbar{padding:8px 10px;gap:4px;}
-    .topbar button{padding:5px 10px;font-size:11px;}
-    .topbar input{width:120px;font-size:12px;}
+    .hamburger { display: block; }
+    .topbar { padding: 10px 14px; flex-wrap: nowrap; }
+    .topbar-nav {
+      display: flex; flex-wrap: wrap; gap: 6px; width: 100%;
+      max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s ease;
+      padding: 0;
+    }
+    .topbar-nav.open { max-height: 500px; padding-top: 10px; }
+    .topbar-nav button { padding: 7px 14px; font-size: 12px; }
+    .topbar-nav .search-box { width: 100%; margin-left: 0; }
+    .topbar-nav .search-box input { width: 100%; }
+    .topbar-nav .nav-divider { display: none; }
     .mem-grid{grid-template-columns:repeat(3,1fr);}
     .match-grid{grid-template-columns:1fr;}
   }
@@ -255,23 +272,28 @@
 
 <div class="topbar">
   <span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:#fff;margin-right:8px;letter-spacing:-.3px;text-shadow:0 1px 4px rgba(0,0,0,.2);">Soc 2</span>
-  <button onclick="showSection('ch6',this)">Deviance</button>
-  <button onclick="showSection('ch7',this)">Inequality</button>
-  <button onclick="showSection('ch8',this)">Gender</button>
-  <button onclick="showSection('ch9',this)">Race</button>
-  <button onclick="showSection('ch10',this)">Politics</button>
-  <span style="width:1px;height:20px;background:rgba(255,255,255,.2);margin:0 4px;"></span>
-  <button class="active" onclick="showSection('flashcards',this)">Flashcards</button>
-  <button onclick="showSection('quiz',this)">Quiz</button>
-  <button onclick="showSection('tf',this)">True/False</button>
-  <button onclick="showSection('ordering',this)">Ordering</button>
-  <button onclick="showSection('matching',this)">Matching</button>
-  <button onclick="showSection('memory',this)">Memory</button>
-  <button onclick="showSection('fitb',this)">Fill Blank</button>
-  <button onclick="showSection('scenarios',this)">Scenarios</button>
-  <button onclick="showSection('speed',this)">Speed</button>
-  <button onclick="showSection('test',this)">Full Test</button>
-  <div class="search-box"><input type="text" placeholder="Search notes..." oninput="doSearch(this.value)"></div>
+  <div class="hamburger" onclick="this.classList.toggle('open');document.getElementById('topbarNav').classList.toggle('open');">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="topbar-nav" id="topbarNav">
+    <button onclick="showSection('ch6',this)">Deviance</button>
+    <button onclick="showSection('ch7',this)">Inequality</button>
+    <button onclick="showSection('ch8',this)">Gender</button>
+    <button onclick="showSection('ch9',this)">Race</button>
+    <button onclick="showSection('ch10',this)">Politics</button>
+    <span class="nav-divider" style="width:1px;height:20px;background:rgba(255,255,255,.2);margin:0 4px;"></span>
+    <button class="active" onclick="showSection('flashcards',this)">Flashcards</button>
+    <button onclick="showSection('quiz',this)">Quiz</button>
+    <button onclick="showSection('tf',this)">True/False</button>
+    <button onclick="showSection('ordering',this)">Ordering</button>
+    <button onclick="showSection('matching',this)">Matching</button>
+    <button onclick="showSection('memory',this)">Memory</button>
+    <button onclick="showSection('fitb',this)">Fill Blank</button>
+    <button onclick="showSection('scenarios',this)">Scenarios</button>
+    <button onclick="showSection('speed',this)">Speed</button>
+    <button onclick="showSection('test',this)">Full Test</button>
+    <div class="search-box"><input type="text" placeholder="Search notes..." oninput="doSearch(this.value)"></div>
+  </div>
 </div>
 
 <!-- ===== CHAPTER 6: DEVIANCE ===== -->
@@ -693,10 +715,15 @@
 /* ===== SECTION NAVIGATION ===== */
 function showSection(id, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.topbar button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.topbar-nav button').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   if (btn) btn.classList.add('active');
   if (id !== 'speed' && typeof speedTimerInterval !== 'undefined' && speedTimerInterval) { clearInterval(speedTimerInterval); speedTimerInterval = null; }
+  // auto-collapse mobile menu
+  const nav = document.getElementById('topbarNav');
+  const ham = document.querySelector('.hamburger');
+  if (nav) nav.classList.remove('open');
+  if (ham) ham.classList.remove('open');
 }
 
 /* ===== SEARCH ===== */
