@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sociology Exam 2 Study Tool</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
+
+  :root {
+    --navy: #1e2a4a; --navy-deep: #141d35; --navy-light: #eceef4; --navy-glow: rgba(30,42,74,.12);
+    --rose: #b5636a; --rose-light: #faf0f1; --rose-glow: rgba(181,99,106,.10);
+    --slate: #4a5568; --slate-light: #f0f2f5;
+    --red: #c0392b; --red-light: #fdf0ee;
+    --gold: #b8860b;
+    --bg: #faf8f5; --card: rgba(255,255,255,.75); --card-solid: #fff;
+    --text: #2d2d3a; --text-soft: #6b7080; --border: rgba(30,42,74,.08);
+    --shadow-sm: 0 1px 3px rgba(30,42,74,.05); --shadow-md: 0 4px 20px rgba(30,42,74,.06); --shadow-lg: 0 8px 40px rgba(30,42,74,.09);
+    --radius: 14px; --radius-sm: 10px; --radius-pill: 50px;
+    --green: var(--navy); --green-light: var(--navy-light); --green-glow: var(--navy-glow);
+    --purple: var(--rose); --purple-light: var(--rose-light); --purple-glow: var(--rose-glow);
+    --blue: var(--slate); --blue-light: var(--slate-light);
+    --amber: var(--gold);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; min-height: 100vh;
+    background-image: radial-gradient(ellipse at 20% 0%, rgba(181,99,106,.04) 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, rgba(30,42,74,.04) 0%, transparent 60%);
+  }
+
+  /* NAV BAR */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(135deg, #141d35 0%, #1e2a4a 40%, #2a3555 70%, #3d2d3a 100%);
+    padding: 10px 20px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,.18); backdrop-filter: blur(10px);
+  }
+  .topbar::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent); }
+  .topbar button {
+    background: rgba(255,255,255,.1); color: rgba(255,255,255,.85); border: 1px solid rgba(255,255,255,.12);
+    padding: 7px 15px; border-radius: var(--radius-pill); cursor: pointer; font-size: 12.5px; font-weight: 500;
+    transition: all .2s ease; white-space: nowrap; backdrop-filter: blur(4px); letter-spacing: .2px;
+  }
+  .topbar button:hover { background: rgba(255,255,255,.22); color: #fff; border-color: rgba(255,255,255,.3); transform: translateY(-1px); }
+  .topbar button.active { background: rgba(255,255,255,.95); color: var(--navy); font-weight: 700; border-color: rgba(255,255,255,.95); box-shadow: 0 2px 12px rgba(255,255,255,.2); }
+  .topbar .search-box { margin-left: auto; }
+  .topbar input { padding: 7px 14px; border-radius: var(--radius-pill); border: 1px solid rgba(255,255,255,.2); font-size: 13px; width: 180px; background: rgba(255,255,255,.12); color: #fff; backdrop-filter: blur(4px); transition: .2s; }
+  .topbar input::placeholder { color: rgba(255,255,255,.5); }
+  .topbar input:focus { outline: none; background: rgba(255,255,255,.2); border-color: rgba(255,255,255,.4); box-shadow: 0 0 0 3px rgba(255,255,255,.1); }
+
+  /* SECTIONS */
+  .section { display: none; max-width: 960px; margin: 0 auto; padding: 28px 24px 40px; animation: fadeUp .35s ease-out; }
+  .section.active { display: block; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* TYPOGRAPHY */
+  h1 { font-family: 'Playfair Display', Georgia, serif; color: var(--green); font-size: 26px; font-weight: 800; margin-bottom: 16px; padding-bottom: 10px; letter-spacing: -.3px; position: relative; }
+  h1::after { content: ''; display: block; margin-top: 10px; width: 60px; height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--rose), var(--navy)); }
+  h2 { font-family: 'Inter', sans-serif; color: var(--purple); font-size: 16px; font-weight: 700; margin: 24px 0 10px; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
+  h3 { color: var(--blue); font-size: 14px; font-weight: 700; margin: 16px 0 6px; }
+  h4 { color: var(--text); font-size: 13px; font-weight: 600; margin: 10px 0 4px; }
+  p { margin: 5px 0; line-height: 1.65; }
+
+  /* CALLOUT BOXES */
+  .key-term { color: var(--green); font-weight: 600; margin: 10px 0; padding: 10px 14px; font-size: 13.5px; line-height: 1.6; background: linear-gradient(135deg, var(--green-light), #f0faf4); border-left: 4px solid var(--green); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; box-shadow: var(--shadow-sm); }
+  .warning { color: var(--red); font-weight: 600; margin: 10px 0; padding: 10px 14px; font-size: 13.5px; line-height: 1.6; background: linear-gradient(135deg, var(--red-light), #fff5f5); border-left: 4px solid var(--red); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; box-shadow: var(--shadow-sm); }
+  .note { margin: 10px 0; padding: 10px 14px; font-size: 13.5px; line-height: 1.6; background: linear-gradient(135deg, var(--blue-light), #f5f9ff); border-left: 4px solid var(--blue); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; box-shadow: var(--shadow-sm); }
+
+  ul { margin: 6px 0 6px 22px; }
+  li { margin: 3px 0; line-height: 1.65; }
+  li::marker { color: var(--rose); }
+
+  /* TABLES */
+  table { border-collapse: separate; border-spacing: 0; margin: 12px 0; width: 100%; border-radius: var(--radius-sm); overflow: hidden; box-shadow: var(--shadow-sm); }
+  th { background: linear-gradient(135deg, var(--navy), #2a3a5e); color: #fff; padding: 10px 14px; text-align: left; font-size: 13px; font-weight: 600; }
+  td { border-bottom: 1px solid var(--border); padding: 9px 14px; font-size: 13px; background: #fff; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #fafbf9; }
+  tr:hover td { background: var(--green-light); transition: .15s; }
+
+  mark { background: linear-gradient(135deg, #fde68a, #fbbf24); padding: 1px 4px; border-radius: 3px; }
+
+  /* SHARED CONTROLS */
+  .ctrl-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 18px; padding: 14px 16px; background: var(--card); backdrop-filter: blur(12px); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+  .ctrl-bar button { background: var(--green-light); color: var(--green); border: 2px solid transparent; padding: 7px 18px; border-radius: var(--radius-pill); cursor: pointer; font-size: 13px; font-weight: 600; transition: all .2s ease; }
+  .ctrl-bar button:hover { background: var(--green); color: #fff; transform: translateY(-1px); box-shadow: 0 4px 12px var(--green-glow); }
+  .ctrl-bar button.on { background: var(--green); color: #fff; box-shadow: 0 4px 12px var(--green-glow); }
+  .purple-btn { background: var(--purple) !important; color: #fff !important; border-color: transparent !important; }
+  .purple-btn:hover { background: #8a3e45 !important; box-shadow: 0 4px 12px var(--purple-glow) !important; }
+  .green-btn { background: linear-gradient(135deg, var(--navy), #2a3a5e); color: #fff; border: none; padding: 11px 26px; border-radius: var(--radius-sm); cursor: pointer; font-size: 14px; font-weight: 600; transition: all .2s ease; box-shadow: 0 2px 8px var(--green-glow); }
+  .green-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px var(--green-glow); }
+  .green-btn:disabled { background: #d1d5db; cursor: default; box-shadow: none; transform: none; }
+
+  /* FLASHCARDS */
+  .flashcard-container { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 24px 0; }
+  .fc-progress { font-size: 14px; color: var(--text-soft); font-weight: 600; }
+  .fc-score { font-size: 13px; color: var(--purple); font-weight: 600; }
+  .flashcard { width: 100%; max-width: 620px; min-height: 280px; perspective: 1000px; cursor: pointer; }
+  .flashcard-inner { position: relative; width: 100%; min-height: 280px; transition: transform 0.5s cubic-bezier(.4,.2,.2,1); transform-style: preserve-3d; }
+  .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+  .flashcard-front, .flashcard-back { position: absolute; width: 100%; min-height: 280px; backface-visibility: hidden; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-shadow: var(--shadow-lg); }
+  .flashcard-front { background: linear-gradient(160deg, #f5f3ef 0%, var(--rose-light) 50%, var(--navy-light) 100%); border: 2px solid rgba(30,42,74,.12); }
+  .flashcard-front .fc-label { font-size: 10px; text-transform: uppercase; letter-spacing: 3px; color: var(--purple); margin-bottom: 14px; font-weight: 700; }
+  .flashcard-front .fc-term { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--green); line-height: 1.4; }
+  .flashcard-back { background: linear-gradient(160deg, var(--rose-light) 0%, #f5f3ef 50%, var(--navy-light) 100%); border: 2px solid rgba(181,99,106,.15); transform: rotateY(180deg); }
+  .flashcard-back .fc-label { font-size: 10px; text-transform: uppercase; letter-spacing: 3px; color: var(--green); margin-bottom: 14px; font-weight: 700; }
+  .flashcard-back .fc-answer { font-size: 15px; color: var(--text); line-height: 1.7; }
+  .flashcard-hint { font-size: 11px; color: #aaa; margin-top: 10px; letter-spacing: .5px; }
+  .fc-nav { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: center; }
+  .fc-nav button { border-radius: var(--radius-sm); border: none; cursor: pointer; font-weight: 600; padding: 11px 22px; font-size: 13px; transition: all .2s ease; }
+  .fc-know { background: linear-gradient(135deg, #3d7a5f, #2d6a4f); color: #fff; box-shadow: 0 2px 8px rgba(61,122,95,.2); }
+  .fc-know:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(61,122,95,.3); }
+  .fc-dunno { background: linear-gradient(135deg, var(--rose), #a04e55); color: #fff; box-shadow: 0 2px 8px var(--rose-glow); }
+  .fc-dunno:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(181,99,106,.25); }
+
+  /* MATCHING GAME */
+  .game-container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .game-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; padding: 12px 18px; background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+  .game-header .game-score { font-size: 16px; font-weight: 700; color: var(--green); }
+  .game-header .game-timer { font-size: 16px; font-weight: 700; color: var(--purple); }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--purple); text-align: center; margin-bottom: 6px; }
+  .match-item { padding: 13px 16px; border-radius: var(--radius-sm); cursor: pointer; font-size: 13px; line-height: 1.5; transition: all .2s ease; border: 2px solid var(--border); background: var(--card-solid); user-select: none; box-shadow: var(--shadow-sm); }
+  .match-item:hover { border-color: var(--green); box-shadow: 0 4px 14px var(--green-glow); transform: translateY(-1px); }
+  .match-item.selected { border-color: var(--green); background: var(--green-light); box-shadow: 0 4px 14px var(--green-glow); }
+  .match-item.correct { border-color: #3d7a5f; background: #e8f0ec; pointer-events: none; opacity: .75; }
+  .match-item.wrong { border-color: var(--rose); background: #f5e6e7; animation: shake .4s; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+  .match-item.correct::after { content: ' \u2713'; color: #2d6a4f; font-weight: 700; }
+  .game-complete { text-align: center; padding: 40px; }
+  .game-complete h2 { font-family: 'Playfair Display', serif; color: var(--green); font-size: 26px; margin-bottom: 10px; }
+  .game-complete p { font-size: 16px; color: var(--text-soft); margin: 4px 0; }
+  .game-complete .final-score { font-size: 36px; font-weight: 800; color: var(--purple); margin: 16px 0; }
+
+  /* QUIZ / TEST */
+  .quiz-container { max-width: 700px; margin: 0 auto; padding: 20px; }
+  .quiz-q { font-size: 16px; font-weight: 600; color: var(--green); margin-bottom: 16px; line-height: 1.6; }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .quiz-opt { padding: 13px 18px; border: 2px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; font-size: 14px; transition: all .2s ease; background: var(--card-solid); box-shadow: var(--shadow-sm); }
+  .quiz-opt:hover { border-color: var(--green); background: var(--green-light); transform: translateY(-1px); }
+  .quiz-opt.q-correct { border-color: #3d7a5f; background: #e8f0ec; }
+  .quiz-opt.q-wrong { border-color: var(--rose); background: #f5e6e7; }
+  .quiz-explanation { display: none; padding: 14px 16px; background: linear-gradient(135deg, var(--blue-light), #f8fbff); border-left: 4px solid var(--blue); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 10px 0 18px; font-size: 13px; line-height: 1.6; box-shadow: var(--shadow-sm); }
+  .quiz-explanation.show { display: block; animation: fadeUp .3s ease-out; }
+  .quiz-nav { display: flex; gap: 12px; justify-content: center; }
+  .quiz-progress { text-align: center; margin-bottom: 12px; font-size: 14px; color: var(--text-soft); font-weight: 600; }
+  .quiz-score-bar { height: 6px; background: #e5e7eb; border-radius: 3px; margin-bottom: 18px; overflow: hidden; }
+  .quiz-score-fill { height: 100%; background: linear-gradient(90deg, #3d7a5f, var(--navy)); border-radius: 3px; transition: width .4s ease; }
+
+  /* TRUE/FALSE */
+  .tf-card { max-width: 660px; margin: 0 auto; padding: 28px; text-align: center; background: var(--card); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow-md); }
+  .tf-statement { font-size: 18px; font-weight: 600; color: var(--text); line-height: 1.6; margin: 24px 0; min-height: 60px; }
+  .tf-btns { display: flex; gap: 16px; justify-content: center; margin: 18px 0; }
+  .tf-btns button { padding: 14px 42px; border-radius: 14px; border: 3px solid; font-size: 18px; font-weight: 700; cursor: pointer; transition: all .2s ease; }
+  .tf-true { background: #eef3f0; border-color: #3d7a5f; color: #2d6a4f; }
+  .tf-true:hover { background: #e0ece5; transform: translateY(-2px); box-shadow: 0 4px 16px rgba(61,122,95,.15); }
+  .tf-false { background: var(--rose-light); border-color: var(--rose); color: #8a3e45; }
+  .tf-false:hover { background: #f5e6e7; transform: translateY(-2px); box-shadow: 0 4px 16px var(--rose-glow); }
+  .tf-feedback { font-size: 14px; min-height: 50px; padding: 12px 14px; border-radius: var(--radius-sm); margin-top: 14px; line-height: 1.6; }
+  .tf-feedback.correct-fb { background: #eef3f0; color: #2d6a4f; border: 1px solid #b0d4bf; }
+  .tf-feedback.wrong-fb { background: #fef2f2; color: #a04e55; border: 1px solid #e0bfc1; }
+  .tf-streak { font-size: 14px; color: var(--purple); font-weight: 700; margin-top: 10px; }
+
+  /* ORDERING GAME */
+  .order-container { max-width: 620px; margin: 0 auto; }
+  .order-prompt { font-size: 16px; font-weight: 600; color: var(--green); text-align: center; margin-bottom: 18px; }
+  .order-items { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+  .order-item { padding: 14px 16px; background: var(--card-solid); border: 2px solid var(--border); border-radius: var(--radius-sm); cursor: grab; font-size: 14px; display: flex; align-items: center; gap: 12px; user-select: none; transition: all .2s ease; box-shadow: var(--shadow-sm); }
+  .order-item:hover { border-color: var(--green); transform: translateY(-1px); box-shadow: 0 4px 14px var(--green-glow); }
+  .order-item .order-num { background: linear-gradient(135deg, var(--navy), #2a3a5e); color: #fff; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0; }
+  .order-item.o-correct { border-color: #3d7a5f; background: #eef3f0; }
+  .order-item.o-wrong { border-color: var(--rose); background: #fef2f2; }
+  .order-item .arrow-btns { margin-left: auto; display: flex; gap: 4px; }
+  .order-item .arrow-btns button { background: #f3f4f6; border: none; border-radius: 8px; width: 30px; height: 30px; cursor: pointer; font-size: 16px; line-height: 1; transition: .15s; }
+  .order-item .arrow-btns button:hover { background: #e5e7eb; }
+
+  /* MEMORY CARD GAME */
+  .mem-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 720px; margin: 18px auto; }
+  .mem-card { height: 115px; perspective: 800px; cursor: pointer; }
+  .mem-card-inner { position: relative; width: 100%; height: 100%; transition: transform .45s cubic-bezier(.4,.2,.2,1); transform-style: preserve-3d; }
+  .mem-card.mem-flipped .mem-card-inner { transform: rotateY(180deg); }
+  .mem-card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px; font-size: 12px; line-height: 1.35; }
+  .mem-card-front { background: linear-gradient(145deg, var(--navy-deep), #2a3a5e); color: #fff; font-size: 28px; border: 2px solid rgba(255,255,255,.1); box-shadow: var(--shadow-sm); }
+  .mem-card-back { background: var(--card-solid); border: 2px solid var(--purple); color: var(--text); font-weight: 600; transform: rotateY(180deg); box-shadow: var(--shadow-sm); }
+  .mem-card.mem-matched { opacity: .5; pointer-events: none; }
+  .mem-card.mem-matched .mem-card-back { border-color: #3d7a5f; background: #eef3f0; }
+
+  /* FILL IN THE BLANK */
+  .fitb-card { max-width: 720px; margin: 0 auto; padding: 30px; background: var(--card); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow-md); }
+  .fitb-sentence { font-size: 17px; line-height: 1.75; color: var(--text); margin-bottom: 22px; }
+  .fitb-sentence .fitb-blank { background: linear-gradient(135deg, #fde68a, #fbbf24); padding: 3px 20px; border-radius: 6px; font-weight: 700; border-bottom: 3px solid #d97706; }
+  .fitb-input-row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+  .fitb-input-row input { flex: 1; min-width: 200px; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: var(--radius-sm); font-size: 15px; transition: all .2s; background: var(--card-solid); }
+  .fitb-input-row input:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px var(--green-glow); }
+  .fitb-feedback { padding: 12px 14px; border-radius: var(--radius-sm); margin-bottom: 16px; font-size: 14px; line-height: 1.6; min-height: 20px; }
+  .fitb-feedback.fb-correct { background: #eef3f0; color: #2d6a4f; border: 1px solid #b0d4bf; }
+  .fitb-feedback.fb-wrong { background: #fef2f2; color: #a04e55; border: 1px solid #e0bfc1; }
+
+  /* SCENARIO QUESTIONS */
+  .scenario-box { background: linear-gradient(135deg, var(--purple-light), #faf5ff); border-left: 4px solid var(--purple); padding: 18px 22px; border-radius: 0 var(--radius) var(--radius) 0; margin-bottom: 18px; font-style: italic; color: #444; line-height: 1.7; font-size: 14px; box-shadow: var(--shadow-sm); }
+  .scenario-box::before { content: 'SCENARIO'; display: block; font-style: normal; font-size: 10px; font-weight: 700; letter-spacing: 3px; color: var(--purple); margin-bottom: 8px; }
+
+  /* SPEED ROUND */
+  .speed-timer { font-size: 64px; font-weight: 800; color: var(--green); text-align: center; margin: 10px 0; font-variant-numeric: tabular-nums; }
+  .speed-timer.warning { color: var(--amber); }
+  .speed-timer.danger { color: var(--red); }
+  .speed-flash { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 200; opacity: 0; transition: opacity .15s; }
+  .speed-flash.flash-correct { background: rgba(61,122,95,.18); opacity: 1; }
+  .speed-flash.flash-wrong { background: rgba(181,99,106,.18); opacity: 1; }
+  .speed-start-screen { text-align: center; padding: 48px 24px; }
+  .speed-start-screen h2 { font-family: 'Playfair Display', serif; color: var(--green); font-size: 26px; margin-bottom: 12px; }
+  .speed-start-screen p { color: var(--text-soft); font-size: 15px; margin-bottom: 22px; }
+  .speed-results { text-align: center; padding: 36px; background: var(--card); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow-md); max-width: 520px; margin: 0 auto; }
+  .speed-results h2 { font-family: 'Playfair Display', serif; color: var(--green); margin-bottom: 10px; }
+  .speed-results .speed-big { font-size: 52px; font-weight: 800; color: var(--purple); margin: 14px 0; }
+  .speed-stat-row { display: flex; justify-content: center; gap: 36px; margin: 14px 0; }
+  .speed-stat { text-align: center; }
+  .speed-stat .stat-num { font-size: 30px; font-weight: 700; color: var(--green); }
+  .speed-stat .stat-label { font-size: 11px; color: #9ca3af; text-transform: uppercase; letter-spacing: 1.5px; }
+
+  /* FULL TEST */
+  .test-container { max-width: 760px; margin: 0 auto; padding: 20px; }
+  .test-q-block { background: var(--card-solid); border-radius: var(--radius); padding: 18px 22px; margin-bottom: 18px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); transition: .2s; }
+  .test-q-block:hover { box-shadow: var(--shadow-md); }
+  .test-q-num { font-size: 11px; color: var(--purple); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+  .test-q-text { font-size: 15px; font-weight: 600; color: var(--green); margin-bottom: 12px; line-height: 1.5; }
+  .test-opts { display: flex; flex-direction: column; gap: 6px; }
+  .test-opt { padding: 11px 16px; border: 2px solid #e5e7eb; border-radius: var(--radius-sm); cursor: pointer; font-size: 13px; transition: all .15s ease; }
+  .test-opt:hover { border-color: var(--green); background: var(--green-light); }
+  .test-opt.t-selected { border-color: var(--green); background: var(--green-light); font-weight: 600; }
+  .test-opt.t-correct { border-color: #3d7a5f; background: #e8f0ec; }
+  .test-opt.t-wrong { border-color: var(--rose); background: #f5e6e7; }
+  .test-exp { display: none; padding: 12px 14px; background: linear-gradient(135deg, var(--blue-light), #f8fbff); border-left: 4px solid var(--blue); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-top: 10px; font-size: 12px; line-height: 1.5; }
+  .test-exp.show { display: block; animation: fadeUp .3s ease-out; }
+  .test-summary { text-align: center; padding: 28px; background: var(--card); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow-md); margin-top: 24px; }
+  .test-summary h2 { font-family: 'Playfair Display', serif; color: var(--green); margin-bottom: 10px; }
+  .test-summary .big-score { font-size: 52px; font-weight: 800; color: var(--purple); margin: 14px 0; }
+  .test-grade { font-size: 22px; font-weight: 700; margin: 10px 0; }
+  .test-grade.grade-a { color: #2d6a4f; }
+  .test-grade.grade-b { color: var(--green); }
+  .test-grade.grade-c { color: var(--amber); }
+  .test-grade.grade-f { color: var(--red); }
+
+  @media(max-width:600px){
+    .topbar{padding:8px 10px;gap:4px;}
+    .topbar button{padding:5px 10px;font-size:11px;}
+    .topbar input{width:120px;font-size:12px;}
+    .mem-grid{grid-template-columns:repeat(3,1fr);}
+    .match-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:#fff;margin-right:8px;letter-spacing:-.3px;text-shadow:0 1px 4px rgba(0,0,0,.2);">Soc 2</span>
+  <button onclick="showSection('ch6',this)">Deviance</button>
+  <button onclick="showSection('ch7',this)">Inequality</button>
+  <button onclick="showSection('ch8',this)">Gender</button>
+  <button onclick="showSection('ch9',this)">Race</button>
+  <button onclick="showSection('ch10',this)">Politics</button>
+  <span style="width:1px;height:20px;background:rgba(255,255,255,.2);margin:0 4px;"></span>
+  <button class="active" onclick="showSection('flashcards',this)">Flashcards</button>
+  <button onclick="showSection('quiz',this)">Quiz</button>
+  <button onclick="showSection('tf',this)">True/False</button>
+  <button onclick="showSection('ordering',this)">Ordering</button>
+  <button onclick="showSection('matching',this)">Matching</button>
+  <button onclick="showSection('memory',this)">Memory</button>
+  <button onclick="showSection('fitb',this)">Fill Blank</button>
+  <button onclick="showSection('scenarios',this)">Scenarios</button>
+  <button onclick="showSection('speed',this)">Speed</button>
+  <button onclick="showSection('test',this)">Full Test</button>
+  <div class="search-box"><input type="text" placeholder="Search notes..." oninput="doSearch(this.value)"></div>
+</div>
+
+<!-- ===== CHAPTER 6: DEVIANCE ===== -->
+<div id="ch6" class="section">
+<h1>Chapter 6: Deviance &amp; Social Control</h1>
+
+<h2>What Is Social Deviance?</h2>
+<div class="key-term"><strong>Social deviance:</strong> any transgression of socially established norms. It is <strong>normative</strong> (based on norms) and <strong>relativist</strong> (differs across place, time, and within societies).</div>
+<p>Includes (all?) crime. What counts as deviant changes across cultures and eras.</p>
+
+<h2>Functionalist Perspectives</h2>
+<h3>Durkheim</h3>
+<p>While deviance is abnormal, a certain amount is <strong>functional</strong> &mdash; it contributes to social cohesion by reinforcing the sense of what is right and wrong.</p>
+<div class="key-term"><strong>Anomie:</strong> a state in which society's norms fail to regulate behavior.</div>
+
+<h3>Durkheim's Normative Theory of Suicide</h3>
+<table>
+<tr><th></th><th>Low</th><th>High</th></tr>
+<tr><td><strong>Social Integration</strong></td><td>Egoistic (isolation)</td><td>Altruistic (self-sacrifice)</td></tr>
+<tr><td><strong>Social Regulation</strong></td><td>Anomic (normlessness)</td><td>Fatalistic (oppressive discipline)</td></tr>
+</table>
+
+<h3>Merton's Strain Theory</h3>
+<p>When a gap exists between cultural goals and legitimate means:</p>
+<table>
+<tr><th>Adaptation</th><th>Goals</th><th>Means</th></tr>
+<tr><td>Conformist</td><td>Accept</td><td>Accept</td></tr>
+<tr><td>Innovator</td><td>Accept</td><td>Reject (finds new)</td></tr>
+<tr><td>Ritualist</td><td>Reject</td><td>Accept</td></tr>
+<tr><td>Retreatist</td><td>Reject</td><td>Reject</td></tr>
+<tr><td>Rebel</td><td>New goals</td><td>New means</td></tr>
+</table>
+
+<h3>Social Bond Theory (Hirschi)</h3>
+<p>Asks: "Why <em>don't</em> people commit crime?" Four bonds hold people to conventional society:</p>
+<ul><li><strong>Attachment</strong> (to others)</li><li><strong>Commitment</strong> (to conventional activities)</li><li><strong>Involvement</strong> (in conventional activities)</li><li><strong>Belief</strong> (in society's values and rules)</li></ul>
+
+<h2>Conflict Perspective</h2>
+<div class="key-term"><strong>Class-dominant theory:</strong> the dominant class's interests determine what is labeled deviant or criminal.</div>
+<h3>Feminist Perspective</h3>
+<ul><li>Most research done by and about males</li><li>Differences in socialization shape deviance patterns</li><li>Stigmatization differs by gender</li><li>Women victimized by virtue of gender</li></ul>
+
+<h2>Symbolic Interactionism</h2>
+<div class="warning"><strong>*Primary vs. Secondary Deviance (Short Answer):</strong> Primary = initial rule-breaking. Secondary = person internalizes the "deviant" label and it becomes part of their identity, producing further deviance.</div>
+<h3>Differential Association Theory</h3>
+<p>Deviant behavior results from associating with people who have attitudes favorable to deviance. Depends on:</p>
+<ul><li>Frequency</li><li>Length</li><li>Intensity</li><li>Chronology of relationships</li></ul>
+
+<h3>Techniques of Neutralization (Sykes &amp; Matza)</h3>
+<table>
+<tr><th>Technique</th><th>Example</th></tr>
+<tr><td>Denial of Responsibility</td><td>"It wasn't my fault"</td></tr>
+<tr><td>Denial of Injury</td><td>"No one was hurt"</td></tr>
+<tr><td>Denial of the Victim</td><td>"They deserved it"</td></tr>
+<tr><td>Condemnation of Condemners</td><td>"Who are they to judge?"</td></tr>
+<tr><td>Appeal to Higher Loyalties</td><td>"I did it for my friends"</td></tr>
+</table>
+
+<h2>Incarceration &amp; Criminal Justice</h2>
+<div class="warning"><strong>*3 Explanations for Rising Incarceration (Short Answer):</strong><br>1. Mandatory minimum sentencing<br>2. "Three strikes" laws<br>3. War on Drugs<br>These also drive racial discrimination in policing and the criminal justice system.</div>
+<div class="note"><strong>Key trend:</strong> Incarceration rates rose dramatically even as crime rates declined. The prison population surged due to policy changes (mandatory minimums, three strikes, War on Drugs), not increases in crime.</div>
+<p>Racial disparities: Higher arrest rates even when offending is comparable (e.g., drug possession, drug dealing); over-policing of impoverished urban neighborhoods; whites less likely to be arrested, charged, found guilty.</p>
+
+<h2>Reading: Situational Ethics &amp; Cheating</h2>
+<div class="note">Helps understand techniques of neutralization. Not independently testable.</div>
+</div>
+
+<!-- ===== CHAPTER 7: INEQUALITY ===== -->
+<div id="ch7" class="section">
+<h1>Chapter 7: Class &amp; Inequality</h1>
+
+<h2>Principles of Stratification</h2>
+<div class="warning"><strong>*4 Principles (Short Answer):</strong><br>1. Trait of society, not individual differences<br>2. Carries over from generation to generation<br>3. Universal but variable<br>4. Involves not just inequality but beliefs as well</div>
+
+<h2>Caste vs. Class</h2>
+<table>
+<tr><th>Caste Society</th><th>Class Society</th></tr>
+<tr><td>Closed system &mdash; remain at birth level for life</td><td>Open system &mdash; upward/downward mobility possible</td></tr>
+<tr><td>Tight rules on relationships (e.g., India's Varnas, U.S. slavery)</td><td>Based on income, occupation, education</td></tr>
+</table>
+<p>General teardrop pattern: small elite at top, bulging lower-middle/working class, tapering at very bottom.</p>
+
+<h2>Functionalist: Davis &amp; Moore</h2>
+<p>Most important positions require more skill and suffer scarcity of personnel. Society rewards to ensure best fill important jobs. &rarr; <strong>Meritocracy</strong></p>
+<div class="note"><strong>Critique:</strong> May limit discovery of talent &mdash; those born to privilege get fuller opportunities; others limited by poor schooling, little money, lack of networks.</div>
+
+<h2>Conflict: Marx</h2>
+<p>Conflict between workers and capitalists. Those with power use stratification to favor themselves and their children, even if detrimental to lower classes.</p>
+
+<h2>Income &amp; Wealth</h2>
+<div class="key-term"><strong>Income:</strong> money received for services/investments. <strong>Wealth (net worth):</strong> assets minus debts. Wealth inequality is far greater than income inequality.</div>
+
+<h2>Neighborhood Poverty &amp; Food Deserts</h2>
+<p>Poor neighborhoods: more negative social, economic, educational effects (rural, suburban, AND urban). Higher risk of heart disease, diabetes, cancer, obesity. <strong>Food deserts:</strong> areas lacking access to affordable, healthy food.</p>
+
+<h2>Reading: Unequal Childhoods (Lareau)</h2>
+<table>
+<tr><th>Concerted Cultivation</th><th>Accomplishment of Natural Growth</th></tr>
+<tr><td>Middle/upper class</td><td>Working class/poor</td></tr>
+<tr><td>Organized activities, reasoning with children</td><td>Less structured, more free play, clear boundaries</td></tr>
+<tr><td>Produces sense of entitlement</td><td>Produces sense of constraint</td></tr>
+</table>
+</div>
+
+<!-- ===== CHAPTER 8: GENDER ===== -->
+<div id="ch8" class="section">
+<h1>Chapter 8: Gender &amp; Society</h1>
+
+<h2>Sex vs. Gender</h2>
+<div class="key-term"><strong>Sex:</strong> anatomical/biological differences from genes. <strong>Gender:</strong> social concept linked to norms, roles, behaviors &mdash; a social construct. Both are increasingly seen as fluid.</div>
+
+<h2>Functionalist: Parsons' Sex Role Theory</h2>
+<p>Complementary roles: women as mothers/caregivers, men as breadwinners. Worried about negative consequences of social change.</p>
+<div class="note"><strong>Critique:</strong> Neglects power differentials from economic dependence. Not commonly argued in contemporary sociology.</div>
+
+<h2>Conflict &amp; Feminist Views</h2>
+<p><strong>Conflict:</strong> Patriarchal capitalists benefit through subordination of women.</p>
+<p><strong>Feminist:</strong> "Men produce and women reproduce." Private vs. public spheres give males privileged access to money, status, independence, opportunity.</p>
+
+<h2>Agents of Socialization</h2>
+<h3>Family: Roots vs. Wings</h3>
+<p>Daughters given "roots" (protection, closeness) and sons given "wings" (independence, exploration).</p>
+<h3>Peers: Social Dosage Effect</h3>
+<p>Encouragement/support vs. aggressive/competitive play. Gender policing stigmatizes those who perform gender "incorrectly."</p>
+<h3>Doing Gender (West &amp; Zimmerman, 1987)</h3>
+<div class="key-term">Gender is not a static identity but an <strong>activity</strong>. Creates differences that, while not biological, appear natural because consistently enacted.</div>
+
+<h2>Gender Inequality</h2>
+<p><strong>Second Shift</strong> (Hochschild): unpaid housework after paid employment. Marriage has "traditionalizing" effect.</p>
+<p><strong>Gender Wage Gap:</strong> women earn ~$0.85 per male dollar; disparity increases for women of color.</p>
+<div class="warning"><strong>*Glass Ceiling:</strong> unofficial barrier women face advancing to upper levels of organizations.<br><strong>*Glass Escalator:</strong> promotional boost men gain in predominantly female occupations (specific to men in female-dominated careers).</div>
+
+<h2>Feminism</h2>
+<p><strong>Black feminist critique &amp; double jeopardy:</strong> early liberal feminism was about white middle-class women. Double jeopardy = discrimination on both race AND gender.</p>
+<p><strong>Hegemonic masculinity:</strong> culturally normative idea emphasizing strength, domination, aggression. Harmful for both men and women.</p>
+
+<h2>Marriage Trends</h2>
+<ul><li>Rates declined; fewer see marriage as necessary</li><li>Divorce peaked in 70s-80s</li><li>Obergefell v. Hodges (2015): same-sex marriage</li><li>Coontz: "traditional" nuclear family was specific to a time/population, not historically dominant</li></ul>
+
+<h2>Readings</h2>
+<div class="note"><strong>Marked (Tannen):</strong> Women in the workplace are always "marked" &mdash; their choices carry extra meaning men's don't.<br><strong>The Way We Weren't (Coontz):</strong> Be familiar with class discussion.</div>
+</div>
+
+<!-- ===== CHAPTER 9: RACE ===== -->
+<div id="ch9" class="section">
+<h1>Chapter 9: Race &amp; Ethnicity</h1>
+
+<h2>Race as Social Construct</h2>
+<div class="key-term"><strong>Race:</strong> a group sharing apparent physical traits deemed socially significant. A social concept, NOT a scientific one.<br><strong>Thomas Theorem:</strong> "If people define situations as real, they are real in their consequences."</div>
+
+<h2>Race vs. Ethnicity</h2>
+<table>
+<tr><th>Race</th><th>Ethnicity</th></tr>
+<tr><td>Based on perceived physical traits</td><td>Shared cultural heritage (language, origin, religion)</td></tr>
+</table>
+<p><strong>Minority:</strong> less powerful group dominated politically and economically by the dominant group.</p>
+
+<h2>Discrimination</h2>
+<div class="key-term"><strong>Individual discrimination:</strong> overt, intentional unequal treatment based on prejudice.<br><strong>Institutional discrimination:</strong> discrimination enshrined in law, policy, or common practice (redlining, War on Drugs, segregation laws).</div>
+
+<h2>Housing &amp; Wealth</h2>
+<p><strong>Redlining:</strong> refusing loans/insurance in minority areas &rarr; prevented homeownership/wealth building.</p>
+<p><strong>Blockbusting:</strong> exploiting racial fears to buy cheap, resell at inflated prices to minorities.</p>
+<p>Post-WWII policies promoted homeownership limited to whites. Discrimination continues via subprime lending.</p>
+
+<h2>Race: Power of an Illusion</h2>
+<div class="note"><strong>Thind &amp; Ozawa cases:</strong> Ozawa (1922) argued whiteness by skin color &mdash; denied (must be "Caucasian"). Thind (1923) argued he was Caucasian &mdash; denied ("common understanding"). Shows arbitrary, constructed nature of racial categories.<br><br><strong>Different states' policies:</strong> States used varying and inconsistent rules to define race (e.g., "one-drop" rules, different blood quantum thresholds). This further demonstrates that race is a social/legal construct, not a biological one.</div>
+
+<h2>Color-blind Ideology</h2>
+<div class="key-term">Ignoring race allows existing systemic inequalities to persist unchallenged. MLK's dream was about not being <em>judged</em> by color, not ignoring it. "To ignore color is to ignore reality."</div>
+
+<h2>Readings</h2>
+<div class="note"><strong>Optional Ethnicities (Waters):</strong> For white Americans, ethnicity is often optional and symbolic (consequence-free). For minorities, ethnicity shapes daily life.<br><strong>Racial Formation &amp; Colorblind readings:</strong> Not independently testable.</div>
+</div>
+
+<!-- ===== CHAPTER 10: POLITICS ===== -->
+<div id="ch10" class="section">
+<h1>Chapter 10: The State, Power &amp; Economy</h1>
+
+<h2>Citizenship Rights</h2>
+<div class="warning"><strong>*Civil vs. Social Rights (Short Answer):</strong><br><strong>Civil rights:</strong> guarantee personal freedom WITHOUT state interference (speech, religion, assembly).<br><strong>Social rights:</strong> guarantee protection BY the state (education, healthcare, welfare).<br><strong>Political rights:</strong> ensure citizens can participate in governance (voting).</div>
+
+<h2>Functionalist View</h2>
+<p>Modern societies may lack consensus. Government as neutral body mediating competing interests.</p>
+
+<h2>Conflict: Marx</h2>
+<p>Government represents and serves capitalist class interests. Power concentrated in hands of few.</p>
+
+<h2>Class Dominance Theory &amp; Power Elite</h2>
+<div class="key-term"><strong>Power elite</strong> (Mills): revolving door between government, business, and military. <strong>Domhoff:</strong> corporate/business elite holds the most influence. Power indicators: Who governs? Who wins?</div>
+
+<h2>Three Types of Legitimate Authority (Weber)</h2>
+<table>
+<tr><th>Type</th><th>Basis</th></tr>
+<tr><td>Traditional</td><td>Belief in sanctity of long-standing traditions</td></tr>
+<tr><td>Rational-Legal</td><td>Legally enacted rules; formal bureaucratic procedures</td></tr>
+<tr><td>Charismatic</td><td>Extraordinary personal abilities inspiring devotion</td></tr>
+</table>
+<div class="key-term"><strong>Routinization of charisma:</strong> transferring charismatic authority into permanent institutions.</div>
+
+<h2>Systems of Governance</h2>
+<table>
+<tr><th>System</th><th>Description</th></tr>
+<tr><td>Authoritarianism</td><td>Citizens denied participation; power for elite (monarchy, dictatorship)</td></tr>
+<tr><td>Totalitarianism</td><td>Denies participation AND controls ALL aspects of life</td></tr>
+<tr><td>Democracy</td><td>Citizens participate directly or through representatives</td></tr>
+</table>
+
+<h2>Economy</h2>
+<div class="key-term"><strong>Emotional labor:</strong> managing feelings/emotions to create a public display in return for a wage.</div>
+<table>
+<tr><th>System</th><th>Key Features</th><th>Critique</th></tr>
+<tr><td>Capitalism</td><td>Market allocation, private profit, private ownership</td><td>Uneven development, inequality, class conflict</td></tr>
+<tr><td>Socialism</td><td>Government manages for workers, redistributes wealth</td><td>Lower standard of living, inefficiency, free rider problem; officials can be corrupt and self-enriching</td></tr>
+<tr><td>Communism</td><td>No private ownership, no classes (theoretical)</td><td>Has never been fully realized in practice</td></tr>
+</table>
+</div>
+
+<!-- ===== FLASHCARDS ===== -->
+<div id="flashcards" class="section active">
+<h1>Flashcards</h1>
+<div class="ctrl-bar" id="fcCategoryBtns">
+  <button class="on" onclick="fcSetCategory('all',this)">All Cards</button>
+  <button onclick="fcSetCategory('6',this)">Deviance</button>
+  <button onclick="fcSetCategory('7',this)">Inequality</button>
+  <button onclick="fcSetCategory('8',this)">Gender</button>
+  <button onclick="fcSetCategory('9',this)">Race</button>
+  <button onclick="fcSetCategory('10',this)">Politics</button>
+  <button class="purple-btn" onclick="fcShuffle()">Shuffle</button>
+</div>
+<div class="flashcard-container">
+  <div class="fc-progress" id="fcProgress">1 / 50</div>
+  <div class="fc-score" id="fcScore">Know: 0 | Still Learning: 0</div>
+  <div class="flashcard" id="flashcard" onclick="fcFlip()">
+    <div class="flashcard-inner" id="fcInner">
+      <div class="flashcard-front">
+        <div class="fc-label">Concept</div>
+        <div class="fc-term" id="fcTerm"></div>
+        <div class="flashcard-hint">tap to flip</div>
+      </div>
+      <div class="flashcard-back">
+        <div class="fc-label">Definition</div>
+        <div class="fc-answer" id="fcAnswer"></div>
+      </div>
+    </div>
+  </div>
+  <div class="fc-nav">
+    <button class="fc-dunno" onclick="fcMark(false)">Still Learning</button>
+    <button class="green-btn" onclick="fcPrev()" id="fcPrevBtn">&larr; Prev</button>
+    <button class="green-btn" onclick="fcNext()" id="fcNextBtn">Next &rarr;</button>
+    <button class="fc-know" onclick="fcMark(true)">Know It</button>
+  </div>
+</div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div id="quiz" class="section">
+<h1>Quick Quiz</h1>
+<div class="ctrl-bar" id="quizCategoryBtns">
+  <button class="on" onclick="quizSetCategory('all',this)">All Topics</button>
+  <button onclick="quizSetCategory('6',this)">Deviance</button>
+  <button onclick="quizSetCategory('7',this)">Inequality</button>
+  <button onclick="quizSetCategory('8',this)">Gender</button>
+  <button onclick="quizSetCategory('9',this)">Race</button>
+  <button onclick="quizSetCategory('10',this)">Politics</button>
+  <button class="purple-btn" onclick="quizRestart()">New Quiz</button>
+</div>
+<div class="quiz-container" id="quizArea"></div>
+</div>
+
+<!-- ===== TRUE/FALSE ===== -->
+<div id="tf" class="section">
+<h1>True / False Rapid Fire</h1>
+<div class="ctrl-bar" id="tfCatBtns">
+  <button class="on" onclick="tfSetCat('all',this)">All Topics</button>
+  <button onclick="tfSetCat('6',this)">Deviance</button>
+  <button onclick="tfSetCat('7',this)">Inequality</button>
+  <button onclick="tfSetCat('8',this)">Gender</button>
+  <button onclick="tfSetCat('9',this)">Race</button>
+  <button onclick="tfSetCat('10',this)">Politics</button>
+  <button class="purple-btn" onclick="tfRestart()">Restart</button>
+</div>
+<div style="max-width:650px;margin:0 auto;">
+  <div class="fc-progress" id="tfProgress">1 / 25</div>
+  <div class="fc-score" id="tfScoreDisplay">Correct: 0 | Wrong: 0</div>
+  <div class="tf-card">
+    <div class="tf-statement" id="tfStatement"></div>
+    <div class="tf-btns">
+      <button class="tf-true" onclick="tfAnswer(true)">TRUE</button>
+      <button class="tf-false" onclick="tfAnswer(false)">FALSE</button>
+    </div>
+    <div class="tf-feedback" id="tfFeedback"></div>
+    <div class="tf-streak" id="tfStreak"></div>
+  </div>
+  <div style="text-align:center;margin-top:14px;">
+    <button class="green-btn" onclick="tfNextQ()" id="tfNextBtn" disabled>Next &rarr;</button>
+  </div>
+</div>
+</div>
+
+<!-- ===== ORDERING ===== -->
+<div id="ordering" class="section">
+<h1>Put It In Order</h1>
+<div class="ctrl-bar" id="orderCatBtns">
+  <button class="on" onclick="orderSetCat('all',this)">All Challenges</button>
+  <button onclick="orderSetCat('6',this)">Deviance</button>
+  <button onclick="orderSetCat('7',this)">Inequality</button>
+  <button onclick="orderSetCat('8',this)">Gender</button>
+  <button onclick="orderSetCat('10',this)">Politics</button>
+  <button id="orderLearnToggle" onclick="orderToggleLearn()" class="purple-btn" style="margin-left:8px;">Learn Mode</button>
+</div>
+<div class="order-container" id="orderArea"></div>
+</div>
+
+<!-- ===== MATCHING ===== -->
+<div id="matching" class="section">
+<h1>Matching Game</h1>
+<div class="ctrl-bar" id="gameCategoryBtns">
+  <button class="on" onclick="gameSetCategory('all',this)">All Topics</button>
+  <button onclick="gameSetCategory('6',this)">Deviance</button>
+  <button onclick="gameSetCategory('7',this)">Inequality</button>
+  <button onclick="gameSetCategory('8',this)">Gender</button>
+  <button onclick="gameSetCategory('9',this)">Race</button>
+  <button onclick="gameSetCategory('10',this)">Politics</button>
+</div>
+<div class="game-container" id="gameArea"></div>
+</div>
+
+<!-- ===== MEMORY ===== -->
+<div id="memory" class="section">
+<h1>Memory Card Game</h1>
+<div class="ctrl-bar" id="memCatBtns">
+  <button class="on" onclick="memSetCat('all',this)">All Topics</button>
+  <button onclick="memSetCat('6',this)">Deviance</button>
+  <button onclick="memSetCat('7',this)">Inequality</button>
+  <button onclick="memSetCat('8',this)">Gender</button>
+  <button onclick="memSetCat('9',this)">Race</button>
+  <button onclick="memSetCat('10',this)">Politics</button>
+</div>
+<div style="text-align:center;">
+  <div class="fc-progress" id="memProgress">Pairs: 0/8</div>
+  <div class="fc-score" id="memMoves">Moves: 0</div>
+</div>
+<div class="mem-grid" id="memGrid"></div>
+</div>
+
+<!-- ===== FILL IN THE BLANK ===== -->
+<div id="fitb" class="section">
+<h1>Fill in the Blank</h1>
+<div class="ctrl-bar" id="fitbCatBtns">
+  <button class="on" onclick="fitbSetCat('all',this)">All Topics</button>
+  <button onclick="fitbSetCat('6',this)">Deviance</button>
+  <button onclick="fitbSetCat('7',this)">Inequality</button>
+  <button onclick="fitbSetCat('8',this)">Gender</button>
+  <button onclick="fitbSetCat('9',this)">Race</button>
+  <button onclick="fitbSetCat('10',this)">Politics</button>
+  <button class="purple-btn" onclick="fitbRestart()">Restart</button>
+</div>
+<div style="max-width:700px;margin:0 auto;">
+  <div class="fc-progress" id="fitbProgress">1 / 15</div>
+  <div class="fc-score" id="fitbScore">Correct: 0 | Wrong: 0</div>
+  <div class="fitb-card" id="fitbCard">
+    <div class="fitb-sentence" id="fitbSentence"></div>
+    <div class="fitb-input-row">
+      <input type="text" id="fitbInput" placeholder="Type your answer..." autocomplete="off">
+      <button class="green-btn" onclick="fitbCheck()" id="fitbCheckBtn">Check</button>
+    </div>
+    <div class="fitb-feedback" id="fitbFeedback"></div>
+    <div style="text-align:center;">
+      <button class="green-btn" onclick="fitbNext()" id="fitbNextBtn" disabled>Next &rarr;</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== SCENARIOS ===== -->
+<div id="scenarios" class="section">
+<h1>Scenario Questions</h1>
+<div class="ctrl-bar" id="scenCatBtns">
+  <button class="on" onclick="scenSetCat('all',this)">All Topics</button>
+  <button onclick="scenSetCat('6',this)">Deviance</button>
+  <button onclick="scenSetCat('7',this)">Inequality</button>
+  <button onclick="scenSetCat('8',this)">Gender</button>
+  <button onclick="scenSetCat('9',this)">Race</button>
+  <button onclick="scenSetCat('10',this)">Politics</button>
+  <button class="purple-btn" onclick="scenRestart()">New Round</button>
+</div>
+<div class="quiz-container" id="scenArea"></div>
+</div>
+
+<!-- ===== SPEED ROUND ===== -->
+<div id="speed" class="section">
+<h1>Speed Round</h1>
+<div class="ctrl-bar" id="speedCatBtns">
+  <button class="on" onclick="speedSetCat('all',this)">All Topics</button>
+  <button onclick="speedSetCat('6',this)">Deviance</button>
+  <button onclick="speedSetCat('7',this)">Inequality</button>
+  <button onclick="speedSetCat('8',this)">Gender</button>
+  <button onclick="speedSetCat('9',this)">Race</button>
+  <button onclick="speedSetCat('10',this)">Politics</button>
+</div>
+<div id="speedArea" style="max-width:700px;margin:0 auto;padding:20px;"></div>
+<div class="speed-flash" id="speedFlash"></div>
+</div>
+
+<!-- ===== FULL TEST ===== -->
+<div id="test" class="section">
+<h1>Full Practice Test</h1>
+<p style="text-align:center;color:#555;margin-bottom:16px;">Multiple choice, true/false, and fill-in-the-blank &mdash; answer all, then submit.</p>
+<div class="test-container" id="testArea"></div>
+<div style="text-align:center;margin:20px 0;">
+  <button class="green-btn" id="testSubmitBtn" onclick="testSubmit()" style="padding:14px 40px;font-size:16px;">Submit Test</button>
+  <button class="purple-btn" onclick="testGenerate()" style="padding:14px 40px;font-size:16px;border:none;border-radius:10px;cursor:pointer;font-weight:600;margin-left:10px;">New Test</button>
+</div>
+<div id="testSummary"></div>
+</div>
+
+<script>
+/* ===== SECTION NAVIGATION ===== */
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.topbar button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (id !== 'speed' && typeof speedTimerInterval !== 'undefined' && speedTimerInterval) { clearInterval(speedTimerInterval); speedTimerInterval = null; }
+}
+
+/* ===== SEARCH ===== */
+function doSearch(query) {
+  document.querySelectorAll('mark').forEach(m => { const p = m.parentNode; p.replaceChild(document.createTextNode(m.textContent), m); p.normalize(); });
+  if (!query || query.length < 2) return;
+  const regex = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+  const sections = document.querySelectorAll('#ch6,#ch7,#ch8,#ch9,#ch10');
+  let first = null;
+  sections.forEach(sec => {
+    const walker = document.createTreeWalker(sec, NodeFilter.SHOW_TEXT, null, false);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node => {
+      if (regex.test(node.textContent)) {
+        const span = document.createElement('span');
+        span.innerHTML = node.textContent.replace(regex, '<mark>$1</mark>');
+        node.parentNode.replaceChild(span, node);
+        if (!first) first = span.querySelector('mark');
+      }
+    });
+  });
+  if (first) {
+    const sec = first.closest('.section');
+    if (sec && !sec.classList.contains('active')) showSection(sec.id, document.querySelector(`.topbar button[onclick*="${sec.id}"]`));
+    first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function shuffleArr(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+/* ===== FLASHCARD DATA ===== */
+const FC_DATA = [
+  // CH 6
+  {cat:'6', q:'Social Deviance', a:'Any transgression of socially established norms. It is normative (based on norms) and relativist (differs across place, time, and within societies).'},
+  {cat:'6', q:"Durkheim's view on deviance", a:'A certain amount of deviance is functional — it contributes to social cohesion by reinforcing what is right and wrong. Anomie = when norms fail to regulate behavior.'},
+  {cat:'6', q:"Durkheim's 4 Suicide Typologies", a:'Based on social integration & regulation:\n• Egoistic: low integration\n• Altruistic: high integration\n• Anomic: low regulation\n• Fatalistic: high regulation'},
+  {cat:'6', q:"Merton's 5 Strain Adaptations", a:'1. Conformist — accepts goals + means\n2. Innovator — accepts goals, rejects means\n3. Ritualist — rejects goals, accepts means\n4. Retreatist — rejects both\n5. Rebel — creates new goals + new means'},
+  {cat:'6', q:'Social Bond Theory (Hirschi)', a:'Why DON\'T people commit crime? Four bonds:\n1. Attachment (to others)\n2. Commitment (to conventional activities)\n3. Involvement (in conventional activities)\n4. Belief (in society\'s values)'},
+  {cat:'6', q:'Class-Dominant Theory (deviance)', a:'The dominant class\'s interests determine what behaviors are labeled deviant or criminal.'},
+  {cat:'6', q:'Primary vs. Secondary Deviance *', a:'Primary: the initial act of rule-breaking.\nSecondary: person internalizes the "deviant" label; it becomes part of their identity, producing further deviance.'},
+  {cat:'6', q:'Differential Association Theory', a:'Deviant behavior results from associating with people favorable to deviance. Depends on: frequency, length, intensity, and chronology of relationships.'},
+  {cat:'6', q:'Techniques of Neutralization', a:'1. Denial of Responsibility\n2. Denial of Injury\n3. Denial of the Victim\n4. Condemnation of Condemners\n5. Appeal to Higher Loyalties'},
+  {cat:'6', q:'3 Explanations for Rising Incarceration *', a:'1. Mandatory minimum sentencing\n2. "Three strikes" laws\n3. War on Drugs\nThese drive racial discrimination in policing and criminal justice.'},
+  {cat:'6', q:'Formal vs. Informal Social Control', a:'Informal: unofficial sanctions in everyday life (gossip, disapproval).\nFormal: official sanctions (laws, police, courts, prison).'},
+  // CH 7
+  {cat:'7', q:'4 Principles of Stratification *', a:'1. Trait of society, not individuals\n2. Carries over from generation to generation\n3. Universal but variable\n4. Involves not just inequality but beliefs'},
+  {cat:'7', q:'Caste vs. Class Society', a:'Caste: closed, remain at birth level for life.\nClass: open, upward/downward mobility based on income, occupation, education.'},
+  {cat:'7', q:'Davis & Moore (Functionalist)', a:'Most important positions need more skill and face personnel scarcity. Society offers rewards for important jobs → meritocracy. Critique: limits talent discovery among less privileged.'},
+  {cat:'7', q:'Marx / Conflict on Inequality', a:'Conflict between workers and capitalists. Those with power use stratification to favor themselves, even if detrimental to lower classes.'},
+  {cat:'7', q:'Income vs. Wealth', a:'Income: money received for services/investments.\nWealth: assets minus debts. Wealth inequality is far greater than income inequality.'},
+  {cat:'7', q:'Neighborhood Poverty & Food Deserts', a:'Poor neighborhoods → more negative social/economic/educational effects. Higher risk of disease. Food deserts = areas lacking affordable, healthy food.'},
+  {cat:'7', q:'Concerted Cultivation vs. Natural Growth', a:'Concerted Cultivation (middle/upper class): organized activities, reasoning.\nNatural Growth (working class/poor): less structured, free play, clear boundaries.'},
+  // CH 8
+  {cat:'8', q:'Sex vs. Gender', a:'Sex: biological/anatomical differences from genes.\nGender: social construct — norms, roles, behaviors. Both seen as fluid.'},
+  {cat:'8', q:"Parsons' Sex Role Theory", a:'Complementary roles: women as caregivers, men as breadwinners. Critique: neglects power differentials from economic dependence. Not commonly argued today.'},
+  {cat:'8', q:'Roots vs. Wings', a:'Daughters given "roots" (protection, closeness). Sons given "wings" (independence, exploration).'},
+  {cat:'8', q:'Social Dosage Effect', a:'Peers exert a "social dosage" effect on gender. Gender policing stigmatizes those who perform gender "incorrectly."'},
+  {cat:'8', q:'Doing Gender (West & Zimmerman)', a:'Gender is not a static identity but an activity. Creates differences that appear natural because consistently enacted.'},
+  {cat:'8', q:'Second Shift (Hochschild)', a:'Unpaid housework women do after paid employment. Marriage has a "traditionalizing" effect on couples.'},
+  {cat:'8', q:'Glass Ceiling *', a:'Unofficial barrier women (and minorities) face advancing to upper levels of organizations.'},
+  {cat:'8', q:'Glass Escalator *', a:'Promotional boost men gain in predominantly female occupations. Specific to men in female-dominated careers.'},
+  {cat:'8', q:'Double Jeopardy', a:'Black feminist critique: women of color face discrimination on both race AND gender simultaneously.'},
+  {cat:'8', q:'Hegemonic Masculinity', a:'Culturally normative idea of male behavior emphasizing strength, domination, aggression. Harmful for both men and women.'},
+  {cat:'8', q:'Marked/Unmarked (Tannen)', a:'Women in the workplace are always "marked" — their choices carry extra meaning. Men\'s choices are "unmarked."'},
+  // CH 9
+  {cat:'9', q:'Race as Social Construct', a:'Race is a social concept, not scientific. Physical traits deemed socially significant. Thomas Theorem: "If people define situations as real, they are real in their consequences."'},
+  {cat:'9', q:'Race vs. Ethnicity', a:'Race: perceived physical traits. Ethnicity: shared cultural heritage (language, origin, religion). Minority: less powerful group dominated by dominant group.'},
+  {cat:'9', q:'Individual vs. Institutional Discrimination', a:'Individual: overt, intentional unequal treatment.\nInstitutional: enshrined in law, policy, or practice (redlining, War on Drugs).'},
+  {cat:'9', q:'Redlining & Blockbusting', a:'Redlining: refusing loans in minority areas. Blockbusting: exploiting racial fears to buy cheap, resell at inflated prices. Both → racial wealth gap.'},
+  {cat:'9', q:'Thind & Ozawa Cases', a:'Ozawa (1922): argued white by skin → denied (must be "Caucasian").\nThind (1923): argued Caucasian → denied ("common understanding"). Shows arbitrary nature of racial categories.'},
+  {cat:'9', q:'Color-blind Ideology Problems', a:'Ignoring race allows systemic inequalities to persist unchallenged. MLK\'s dream was about not being judged by color, not ignoring it.'},
+  {cat:'9', q:'Symbolic Ethnicity (Waters)', a:'For white Americans, ethnicity is optional and consequence-free. For minorities, ethnicity shapes daily life and opportunities.'},
+  // CH 10
+  {cat:'10', q:'Civil vs. Social Rights *', a:'Civil: personal freedom WITHOUT state interference.\nSocial: protection BY the state.\nPolitical: participation in governance.'},
+  {cat:'10', q:'Power Elite (Mills/Domhoff)', a:'Revolving door between government, business, military. Domhoff: corporate elite holds most influence. Power indicators: Who governs? Who wins?'},
+  {cat:'10', q:'3 Types of Legitimate Authority', a:'1. Traditional: sanctity of long-standing traditions\n2. Rational-Legal: legally enacted rules\n3. Charismatic: extraordinary personal abilities\n+ Routinization of charisma: transfer to institutions.'},
+  {cat:'10', q:'3 Systems of Governance', a:'Authoritarianism: citizens denied participation.\nTotalitarianism: denies participation + controls ALL aspects of life.\nDemocracy: citizens participate directly or through representatives.'},
+  {cat:'10', q:'Emotional Labor', a:'Managing feelings/emotions to create a public display in return for a wage. Common in service sector.'},
+  {cat:'10', q:'Capitalism vs. Socialism', a:'Capitalism: private ownership, market allocation, profit. Creates inequality.\nSocialism: government manages for workers. Low extreme poverty but lower standard of living.'},
+  {cat:'10', q:'Communism', a:'Theoretical system: no private ownership, no classes. In practice, officials can be corrupt and self-enriching.'},
+];
+
+/* ===== FLASHCARD ENGINE ===== */
+let fcCards=[...FC_DATA],fcIdx=0,fcKnow=0,fcDunno=0;
+function fcRender(){const c=fcCards[fcIdx];document.getElementById('fcTerm').textContent=c.q;document.getElementById('fcAnswer').textContent=c.a;document.getElementById('flashcard').classList.remove('flipped');document.getElementById('fcProgress').textContent=(fcIdx+1)+' / '+fcCards.length;document.getElementById('fcScore').textContent='Know: '+fcKnow+' | Still Learning: '+fcDunno;document.getElementById('fcPrevBtn').disabled=fcIdx===0;document.getElementById('fcNextBtn').disabled=fcIdx===fcCards.length-1;}
+function fcFlip(){document.getElementById('flashcard').classList.toggle('flipped');}
+function fcNext(){if(fcIdx<fcCards.length-1){fcIdx++;fcRender();}}
+function fcPrev(){if(fcIdx>0){fcIdx--;fcRender();}}
+function fcMark(know){if(know)fcKnow++;else fcDunno++;if(fcIdx<fcCards.length-1){fcIdx++;fcRender();}else{document.getElementById('fcScore').textContent='Done! Know: '+fcKnow+' | Still Learning: '+fcDunno+' out of '+fcCards.length;}}
+function fcShuffle(){shuffleArr(fcCards);fcIdx=0;fcKnow=0;fcDunno=0;fcRender();}
+function fcSetCategory(cat,btn){document.querySelectorAll('#fcCategoryBtns button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');fcCards=cat==='all'?[...FC_DATA]:FC_DATA.filter(c=>c.cat===cat);fcIdx=0;fcKnow=0;fcDunno=0;fcRender();}
+
+/* ===== QUIZ DATA ===== */
+const QUIZ_DATA = [
+  {cat:'6',q:"According to Merton, an 'innovator' is someone who:",opts:['Accepts goals and means','Accepts goals but rejects traditional means','Rejects goals but accepts means','Creates entirely new goals and means'],ans:1,exp:'Innovators accept cultural goals but find new (often deviant) means to achieve them.'},
+  {cat:'6',q:'Which is NOT one of Hirschi\'s four social bonds?',opts:['Attachment','Commitment','Conformity','Belief'],ans:2,exp:'The four bonds are Attachment, Commitment, Involvement, and Belief. Conformity is a Merton adaptation.'},
+  {cat:'6',q:'Primary deviance becomes secondary deviance when:',opts:['The act is repeated multiple times','The person is caught by police','The person internalizes the deviant label','The behavior becomes more serious'],ans:2,exp:'Secondary deviance occurs when the label becomes part of identity, producing further deviance.'},
+  {cat:'6',q:'Differential association depends on all EXCEPT:',opts:['Frequency','Genetic predisposition','Intensity','Chronology'],ans:1,exp:'The four factors are frequency, length, intensity, and chronology — not genetics.'},
+  {cat:'6',q:'Which is most associated with racial disparities in drug enforcement?',opts:['Three strikes laws','Mandatory minimums','War on Drugs','Increased crime rates'],ans:2,exp:'The War on Drugs disproportionately targets minority communities despite similar rates of drug use across races.'},
+  {cat:'6',q:"In Durkheim's typology, LOW social integration produces:",opts:['Altruistic suicide','Fatalistic suicide','Anomic suicide','Egoistic suicide'],ans:3,exp:'Egoistic = low integration (isolation). Altruistic = high integration.'},
+  {cat:'6',q:"'Denial of the victim' is a:",opts:['Strain theory adaptation','Social bond','Technique of neutralization','Differential association factor'],ans:2,exp:'It\'s one of Sykes & Matza\'s five techniques of neutralization.'},
+  {cat:'7',q:'Which is NOT a principle of stratification?',opts:["It's a trait of society",'It carries over generationally','It is based on individual merit','It involves beliefs as well as inequality'],ans:2,exp:'Stratification is societal, generational, universal but variable, and involves beliefs — not individual merit.'},
+  {cat:'7',q:'In a caste society:',opts:['People can move up through hard work','Social levels are open','People remain at birth level for life','Class is based on education'],ans:2,exp:'Caste = closed system. You remain at the social level of your birth.'},
+  {cat:'7',q:'The main critique of Davis & Moore is that it:',opts:['Ignores inequality','May limit talent discovery among less privileged',"Doesn't account for mobility",'Favors socialism'],ans:1,exp:'Those born to privilege get fuller opportunities while others are limited.'},
+  {cat:'7',q:"'Concerted cultivation' is associated with:",opts:['Working class/poor','Middle/upper class','All classes equally','Only the wealthy'],ans:1,exp:'Middle/upper class: organized activities, reasoning. Working class = natural growth.'},
+  {cat:'8',q:"Parsons' sex role theory argues:",opts:['Gender roles are oppressive','Complementary gender roles fulfill necessary functions','Gender is entirely constructed','Men and women should have identical roles'],ans:1,exp:'Functionalist view: complementary roles serve societal functions.'},
+  {cat:'8',q:"The 'second shift' refers to:",opts:['Working two paid jobs',"Women's unpaid housework after paid employment",'A factory night shift','The second wave of feminism'],ans:1,exp:'Hochschild: women do unpaid domestic labor after their paid jobs.'},
+  {cat:'8',q:'The glass escalator specifically describes:',opts:["Women's rapid advancement","Men's promotional boost in female-dominated occupations",'A physical barrier','The widening wage gap'],ans:1,exp:'Glass escalator = men receive promotional boosts in predominantly female careers.'},
+  {cat:'8',q:"'Doing gender' means gender is:",opts:['Biologically determined','A static identity','An ongoing activity creating perceived natural differences','Only relevant at work'],ans:2,exp:'West & Zimmerman: gender is performed through constant activity, not a fixed trait.'},
+  {cat:'8',q:"'Double jeopardy' in Black feminist critique refers to:",opts:['Being tried twice for a crime','Facing discrimination on both race AND gender','Having two jobs','The second shift'],ans:1,exp:'Women of color face intersecting discrimination based on both race and gender.'},
+  {cat:'8',q:'Hegemonic masculinity emphasizes:',opts:['Emotional vulnerability','Strength, domination, and aggression','Equal partnership','Feminine qualities in men'],ans:1,exp:'The culturally normative ideal of male behavior — harmful for both men and women.'},
+  {cat:'9',q:'The Thomas Theorem states:',opts:['Race is biologically determined','If people define situations as real, they are real in their consequences','Discrimination is always intentional','Ethnicity and race are the same'],ans:1,exp:'How people perceive reality has real consequences, even if the perception is wrong.'},
+  {cat:'9',q:'What is institutional discrimination?',opts:['One person treating another unfairly','Discrimination enshrined in law, policy, or practice','Discrimination only in schools','Discrimination that no longer exists'],ans:1,exp:'Systemic discrimination in laws, policies, and common practices.'},
+  {cat:'9',q:'Redlining contributed to inequality primarily by:',opts:['Increasing crime rates','Preventing minority homeownership and wealth building','Encouraging school segregation','Limiting voting rights'],ans:1,exp:'Refusing loans in minority areas prevented wealth building through property ownership.'},
+  {cat:'9',q:'The Ozawa and Thind cases illustrate:',opts:['Race has a clear scientific basis','The arbitrary, constructed nature of legal racial categories','Immigration law was fair','Courts applied a consistent standard'],ans:1,exp:'Courts used contradictory standards (science vs. "common understanding"), showing race is socially constructed.'},
+  {cat:'9',q:"'Symbolic ethnicity' means:",opts:['All ethnic identities are meaningless','For white Americans, ethnicity is optional and consequence-free','Everyone experiences ethnicity the same','Ethnic identity is biological'],ans:1,exp:'White Americans can choose when to celebrate heritage; minorities cannot opt out.'},
+  {cat:'9',q:"Color-blind ideology's main problem is:",opts:['It promotes active discrimination','It allows systemic inequalities to persist unchallenged','It was invented by MLK','It only applies to education'],ans:1,exp:'Ignoring race means ignoring real systemic inequalities that need addressing.'},
+  {cat:'10',q:'Civil rights guarantee:',opts:['Protection BY the state','Personal freedom WITHOUT state interference','Participation in governance','Economic equality'],ans:1,exp:'Civil = freedom FROM government. Social = protection BY government.'},
+  {cat:'10',q:'Social rights guarantee:',opts:['Freedom of speech','Right to vote','Protection BY the state (education, healthcare, welfare)','Freedom of religion'],ans:2,exp:'Social rights = government provides services like education and healthcare.'},
+  {cat:'10',q:"Mills' 'power elite' involves a revolving door between:",opts:['Schools, churches, media','Government, business, military','Workers, managers, owners','Local, state, federal gov'],ans:1,exp:'The power elite circulates between government, business, and military leadership.'},
+  {cat:'10',q:'Routinization of charisma refers to:',opts:['Making leaders more routine','Transferring charismatic authority into permanent institutions','Eliminating charismatic leaders','Teaching charisma'],ans:1,exp:'The process of institutionalizing charismatic authority so it survives beyond one leader.'},
+  {cat:'10',q:'Which system regulates ALL aspects of citizens\' lives?',opts:['Democracy','Authoritarianism','Totalitarianism','Monarchy'],ans:2,exp:'Totalitarianism = no limit to state power + controls all aspects of life.'},
+  {cat:'10',q:'The key distinction between capitalism and socialism on inequality:',opts:['Capitalism has no inequality','Socialism eliminates all poverty','Socialism has low extreme poverty/inequality but lower standards of living','No difference'],ans:2,exp:'Trade-off: socialism reduces extreme inequality but at the cost of lower overall standard of living.'},
+  {cat:'10',q:'Emotional labor is:',opts:['Physically demanding work','Managing emotions for a public display in return for a wage','Unpaid housework','Union organizing'],ans:1,exp:'Common in service sector jobs where workers must display certain emotions.'},
+  {cat:'8',q:'Gender wage gap: women earn approximately:',opts:['$0.65 per male dollar','$0.75 per male dollar','$0.85 per male dollar','$0.95 per male dollar'],ans:2,exp:'Women working full-time earn about $0.85 for every comparable male dollar, with larger gaps for women of color.'},
+  {cat:'7',q:'Income vs. wealth: wealth is:',opts:['The same as income','Money received for services','Assets minus debts (net worth)','Annual salary'],ans:2,exp:'Wealth = assets minus debts. Wealth inequality is far greater than income inequality.'},
+];
+
+/* ===== QUIZ ENGINE ===== */
+let quizQuestions=[],quizIdx=0,quizCorrect=0,quizAnswered=false,quizMissed=[],quizRound=1,quizTotalCorrect=0,quizTotalSeen=0;
+function quizSetCategory(cat,btn){document.querySelectorAll('#quizCategoryBtns button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');const pool=cat==='all'?[...QUIZ_DATA]:QUIZ_DATA.filter(q=>q.cat===cat);quizQuestions=shuffleArr(pool);quizIdx=0;quizCorrect=0;quizAnswered=false;quizMissed=[];quizRound=1;quizTotalCorrect=0;quizTotalSeen=0;renderQuiz();}
+function quizRestart(){const c=document.querySelector('#quizCategoryBtns .on');if(c)quizSetCategory(c.textContent==='All Topics'?'all':c.onclick.toString().match(/'(\w+)'/)[1],c);}
+function renderQuiz(){
+  const area=document.getElementById('quizArea');
+  if(quizIdx>=quizQuestions.length){
+    quizTotalSeen+=quizQuestions.length;quizTotalCorrect+=quizCorrect;
+    if(quizMissed.length>0){const mc=quizMissed.length;quizRound++;quizQuestions=shuffleArr([...quizMissed]);quizMissed=[];quizIdx=0;quizCorrect=0;quizAnswered=false;area.innerHTML='<div class="game-complete" style="margin-bottom:20px;"><h2>Round '+(quizRound-1)+' Complete</h2><p style="font-size:16px;color:#555;margin:8px 0;">You missed <strong style="color:#c62828;">'+mc+'</strong> question'+(mc!==1?'s':'')+'. Let\u2019s go through them again!</p><br><button class="green-btn" onclick="renderQuiz()">Continue &rarr;</button></div>';return;}
+    const pct=Math.round(quizTotalCorrect/quizTotalSeen*100);
+    area.innerHTML='<div class="game-complete"><h2>\u2713 All Questions Mastered!</h2><div class="final-score">'+quizTotalCorrect+' / '+quizTotalSeen+' ('+pct+'%)</div><p style="color:#555;">'+(quizRound===1?'Perfect!':'Completed in '+quizRound+' rounds.')+'</p></div>';return;
+  }
+  const q=quizQuestions[quizIdx];
+  let html='<div class="quiz-progress">'+(quizRound>1?'<span style="color:#7b2d8b;">Round '+quizRound+' \u2014 </span>':'')+'Question '+(quizIdx+1)+' of '+quizQuestions.length+'</div>';
+  const pct=quizIdx>0?Math.round(quizCorrect/quizIdx*100):0;
+  html+='<div class="quiz-score-bar"><div class="quiz-score-fill" style="width:'+pct+'%"></div></div>';
+  html+='<div class="quiz-q">'+q.q+'</div><div class="quiz-options">';
+  q.opts.forEach((opt,i)=>{html+='<div class="quiz-opt" onclick="quizAnswer('+i+')" data-idx="'+i+'">'+String.fromCharCode(65+i)+'. '+opt+'</div>';});
+  html+='</div><div class="quiz-explanation" id="quizExp">'+q.exp+'</div>';
+  html+='<div class="quiz-nav"><button class="green-btn" onclick="quizNext()" id="quizNextBtn" disabled>Next &rarr;</button></div>';
+  area.innerHTML=html;quizAnswered=false;
+}
+function quizAnswer(idx){if(quizAnswered)return;quizAnswered=true;const q=quizQuestions[quizIdx];const opts=document.querySelectorAll('.quiz-opt');opts[idx].classList.add(idx===q.ans?'q-correct':'q-wrong');opts[q.ans].classList.add('q-correct');if(idx===q.ans)quizCorrect++;else quizMissed.push(q);document.getElementById('quizExp').classList.add('show');document.getElementById('quizNextBtn').disabled=false;}
+function quizNext(){quizIdx++;renderQuiz();}
+
+/* ===== TRUE/FALSE DATA ===== */
+const TF_DATA = [
+  {cat:'6',s:'Social deviance is normative and relativist — it differs across place and time.',ans:true,exp:'Correct! What counts as deviant changes across cultures and eras.'},
+  {cat:'6',s:'Durkheim believed ALL deviance should be eliminated from society.',ans:false,exp:'Durkheim argued a certain amount of deviance is FUNCTIONAL for social cohesion.'},
+  {cat:'6',s:'Anomie is when society\'s norms successfully regulate all behavior.',ans:false,exp:'Anomie is when norms FAIL to regulate behavior.'},
+  {cat:'6',s:'A retreatist in Merton\'s theory rejects both cultural goals and accepted means.',ans:true,exp:'Retreatists withdraw from society by rejecting both goals and means.'},
+  {cat:'6',s:'A rebel in Merton\'s theory accepts cultural goals but creates new means.',ans:false,exp:'Rebels reject both AND create entirely NEW goals and means.'},
+  {cat:'6',s:'Social Bond Theory asks "Why DO people commit crime?"',ans:false,exp:'It asks "Why DON\'T people commit crime?" Focus is on bonds preventing deviance.'},
+  {cat:'6',s:'Primary deviance is when someone internalizes a deviant label.',ans:false,exp:'That\'s SECONDARY deviance. Primary = the initial act of rule-breaking.'},
+  {cat:'6',s:'Differential association depends on frequency, length, intensity, and chronology.',ans:true,exp:'These four factors determine the influence of deviant associations.'},
+  {cat:'6',s:'The War on Drugs is one of the three main explanations for rising incarceration.',ans:true,exp:'Along with mandatory minimums and three strikes laws.'},
+  {cat:'6',s:'Whites are more likely than minorities to be arrested and charged.',ans:false,exp:'Whites are LESS likely. Minorities face over-policing and higher arrest rates even at comparable offending levels.'},
+  {cat:'7',s:'Social stratification is simply a reflection of individual differences.',ans:false,exp:'Stratification is a trait of SOCIETY, not individual differences — that\'s principle #1.'},
+  {cat:'7',s:'Stratification carries over from generation to generation.',ans:true,exp:'This is one of the four principles of stratification.'},
+  {cat:'7',s:'In a class society, upward mobility is impossible.',ans:false,exp:'That describes a CASTE society. Class societies allow both upward and downward mobility.'},
+  {cat:'7',s:'Davis & Moore argue meritocracy ensures the most important jobs are filled well.',ans:true,exp:'Their functionalist argument says rewards attract competent people to important positions.'},
+  {cat:'7',s:'Wealth inequality is about the same as income inequality.',ans:false,exp:'Wealth inequality is FAR GREATER than income inequality.'},
+  {cat:'7',s:'Food deserts are only found in urban areas.',ans:false,exp:'Food deserts are found in rural, suburban, AND urban areas.'},
+  {cat:'7',s:'Concerted cultivation is the working-class parenting style.',ans:false,exp:'Concerted cultivation = middle/upper class. Working class = accomplishment of natural growth.'},
+  {cat:'8',s:'Sex and gender are the same thing.',ans:false,exp:'Sex = biological. Gender = social construct. They are distinct concepts.'},
+  {cat:'8',s:'Both sex and gender are increasingly seen as fluid.',ans:true,exp:'Contemporary sociology recognizes the fluidity of both biological sex and social gender.'},
+  {cat:'8',s:'Parsons\' sex role theory is commonly argued in contemporary sociology.',ans:false,exp:'It is NOT commonly argued today due to its neglect of power differentials.'},
+  {cat:'8',s:'Daughters are given "wings" and sons are given "roots" in family socialization.',ans:false,exp:'It\'s the opposite: daughters get "roots" (protection) and sons get "wings" (independence).'},
+  {cat:'8',s:'The glass escalator refers to barriers women face in advancement.',ans:false,exp:'That\'s the glass CEILING. The glass escalator = promotional boost for MEN in female-dominated careers.'},
+  {cat:'8',s:'Hegemonic masculinity is harmful only for women.',ans:false,exp:'It is harmful for BOTH men and women.'},
+  {cat:'8',s:'The gender wage gap increases for women of color.',ans:true,exp:'The $0.85 average is worse for women of color.'},
+  {cat:'8',s:'The "traditional" nuclear family has always been the dominant model historically.',ans:false,exp:'Coontz argues it was specific to a point in time and population, not historically dominant.'},
+  {cat:'9',s:'Race has a clear, deterministic biological basis.',ans:false,exp:'Race has NO deterministic biological basis — it is a social construct.'},
+  {cat:'9',s:'The Thomas Theorem says if people define situations as real, they are real in their consequences.',ans:true,exp:'This applies to race: perceived racial differences have real consequences.'},
+  {cat:'9',s:'Ethnicity is based on perceived physical traits.',ans:false,exp:'That\'s RACE. Ethnicity = shared cultural heritage (language, origin, religion).'},
+  {cat:'9',s:'Institutional discrimination is always overt and intentional.',ans:false,exp:'That describes INDIVIDUAL discrimination. Institutional = enshrined in law, policy, or practice.'},
+  {cat:'9',s:'Redlining helped minorities build wealth through homeownership.',ans:false,exp:'Redlining PREVENTED minority homeownership and wealth building.'},
+  {cat:'9',s:'The Ozawa and Thind cases show the arbitrary nature of legal racial categories.',ans:true,exp:'Courts used contradictory standards, revealing race as socially constructed.'},
+  {cat:'9',s:'Color-blind ideology effectively addresses racial inequality.',ans:false,exp:'It allows systemic inequalities to persist unchallenged by ignoring reality.'},
+  {cat:'9',s:'Symbolic ethnicity means ethnicity is optional for white Americans.',ans:true,exp:'White Americans can choose when to celebrate heritage; minorities cannot.'},
+  {cat:'10',s:'Civil rights guarantee protection BY the state.',ans:false,exp:'Civil = freedom WITHOUT state interference. Social = protection BY the state.'},
+  {cat:'10',s:'Social rights include education and healthcare provided by the government.',ans:true,exp:'Social rights = government actively provides services and protection.'},
+  {cat:'10',s:'Marx argued government serves as a neutral body.',ans:false,exp:'That\'s the functionalist view. Marx said government serves the capitalist class.'},
+  {cat:'10',s:'The power elite involves a revolving door between government, business, and military.',ans:true,exp:'Mills\' concept of interconnected elites.'},
+  {cat:'10',s:'Routinization of charisma means charismatic leaders become boring.',ans:false,exp:'It means transferring charismatic authority into permanent institutions.'},
+  {cat:'10',s:'Totalitarianism only denies political participation but respects personal freedom.',ans:false,exp:'Totalitarianism denies participation AND controls ALL aspects of life.'},
+  {cat:'10',s:'Socialism has low extreme poverty but also lower standards of living.',ans:true,exp:'The key trade-off between socialism and capitalism.'},
+  {cat:'10',s:'Emotional labor involves physical strength in labor jobs.',ans:false,exp:'Emotional labor = managing emotions for a public display in return for a wage.'},
+];
+
+/* ===== TRUE/FALSE ENGINE ===== */
+let tfItems=[],tfIdx=0,tfCorrect=0,tfWrong=0,tfStreak=0,tfAnswered=false,tfMissed=[];
+function tfSetCat(cat,btn){document.querySelectorAll('#tfCatBtns button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');tfItems=shuffleArr(cat==='all'?[...TF_DATA]:TF_DATA.filter(t=>t.cat===cat));tfIdx=0;tfCorrect=0;tfWrong=0;tfStreak=0;tfAnswered=false;tfMissed=[];renderTF();}
+function tfRestart(){shuffleArr(tfItems);tfIdx=0;tfCorrect=0;tfWrong=0;tfStreak=0;tfAnswered=false;tfMissed=[];renderTF();}
+function renderTF(){
+  if(tfIdx>=tfItems.length){
+    if(tfMissed.length>0){tfItems=shuffleArr([...tfMissed]);tfMissed=[];tfIdx=0;document.getElementById('tfStatement').textContent='';document.getElementById('tfFeedback').className='tf-feedback';document.getElementById('tfFeedback').innerHTML='<div style="background:#fff8e1;border:1px solid #f9a825;border-radius:8px;padding:12px;color:#795548;font-weight:600;text-align:center;">\u267B Recycling '+tfItems.length+' missed &mdash; let\u2019s nail them!</div>';document.getElementById('tfNextBtn').disabled=false;document.getElementById('tfNextBtn').textContent='Start Retry \u2192';document.getElementById('tfProgress').textContent='Retry: '+tfItems.length;return;}
+    document.getElementById('tfStatement').textContent='All done! '+tfCorrect+' correct out of '+(tfCorrect+tfWrong);document.getElementById('tfFeedback').className='tf-feedback';document.getElementById('tfFeedback').textContent='';document.getElementById('tfNextBtn').disabled=true;return;
+  }
+  const t=tfItems[tfIdx];document.getElementById('tfStatement').textContent=t.s;document.getElementById('tfFeedback').className='tf-feedback';document.getElementById('tfFeedback').textContent='';
+  document.getElementById('tfProgress').textContent=(tfIdx+1)+' / '+tfItems.length;document.getElementById('tfScoreDisplay').textContent='Correct: '+tfCorrect+' | Wrong: '+tfWrong;
+  document.getElementById('tfStreak').textContent=tfStreak>1?'Streak: '+tfStreak+'!':'';document.getElementById('tfNextBtn').disabled=true;document.getElementById('tfNextBtn').textContent='Next \u2192';tfAnswered=false;
+}
+function tfAnswer(val){if(tfAnswered)return;tfAnswered=true;const t=tfItems[tfIdx],fb=document.getElementById('tfFeedback');if(val===t.ans){tfCorrect++;tfStreak++;fb.className='tf-feedback correct-fb';fb.textContent='\u2713 '+t.exp;}else{tfWrong++;tfStreak=0;tfMissed.push(t);fb.className='tf-feedback wrong-fb';fb.textContent='\u2717 '+t.exp;}document.getElementById('tfScoreDisplay').textContent='Correct: '+tfCorrect+' | Wrong: '+tfWrong;document.getElementById('tfStreak').textContent=tfStreak>1?'Streak: '+tfStreak+'!':'';document.getElementById('tfNextBtn').disabled=false;}
+function tfNextQ(){tfIdx++;renderTF();}
+
+/* ===== ORDERING DATA ===== */
+const ORDER_DATA = [
+  {cat:'6',prompt:'Order Merton\'s strain adaptations from most to least conforming:',items:['Conformist — accepts goals + means','Ritualist — rejects goals, accepts means','Innovator — accepts goals, rejects means','Retreatist — rejects both goals + means','Rebel — creates new goals + new means'],descs:['Fully aligned with society\'s expectations','Goes through the motions without caring about goals','Pursues success through deviant means','Withdraws from society entirely','Actively works to replace the existing system']},
+  {cat:'6',prompt:'Order the labeling process (primary to secondary deviance):',items:['Individual commits initial rule-breaking act','Person is caught and publicly labeled "deviant"','Others begin to treat person differently','Person internalizes the deviant identity','Deviant label becomes self-fulfilling — more deviance'],descs:['Primary deviance — the initial transgression','The formal or informal labeling process','Stigmatization changes social interactions','Secondary deviance — the label becomes identity','The label produces the very behavior it describes']},
+  {cat:'7',prompt:'Order from least to most stratified system:',items:['Class society (open, mobility possible)','Caste society (closed, fixed at birth)'],descs:['Upward and downward mobility based on income, education, occupation','Social levels are closed — remain at birth level for life']},
+  {cat:'8',prompt:'Order the agents of gender socialization discussed in class:',items:['Family (roots vs. wings from birth)','Peers (social dosage effect)','Schools (hidden curriculum)','Media (representation and stereotypes)'],descs:['Parents treat children differently by gender even before birth','Encouragement/support vs. aggressive play; gender policing','Expectations on behavior and subject; textbooks reinforce stereotypes','Sexualized images of women, outnumbered female characters']},
+  {cat:'10',prompt:'Order from least to most government control of citizens:',items:['Democracy — citizens participate in governance','Authoritarianism — citizens denied participation','Totalitarianism — controls ALL aspects of life'],descs:['Direct or representative participation in government','Power exercised by and for the elite; limited freedom','No limit to state power; opposition outlawed']},
+  {cat:'10',prompt:'Order economic systems by degree of government control (least to most):',items:['Capitalism — private ownership, market allocation','Socialism — government manages for workers','Communism — no private ownership (theoretical)'],descs:['Market-driven, production for profit, private ownership','Government redistributes wealth through wages and services','Theoretical: no economic classes or inequality']},
+];
+
+let orderItems=[],orderIdx=0,orderLearn=true;
+function orderSetCat(cat,btn){document.querySelectorAll('#orderCatBtns button:not(#orderLearnToggle)').forEach(b=>b.classList.remove('on'));btn.classList.add('on');orderItems=shuffleArr(cat==='all'?[...ORDER_DATA]:ORDER_DATA.filter(o=>o.cat===cat));orderIdx=0;renderOrder();}
+function orderToggleLearn(){orderLearn=!orderLearn;document.getElementById('orderLearnToggle').textContent=orderLearn?'Learn Mode':'Quiz Mode';renderOrder();}
+function renderOrder(){
+  const area=document.getElementById('orderArea');
+  if(orderIdx>=orderItems.length){area.innerHTML='<div class="game-complete"><h2>All Done!</h2><br><button class="green-btn" onclick="orderSetCat(\'all\',document.querySelector(\'#orderCatBtns .on\'))">Start Over</button></div>';return;}
+  const o=orderItems[orderIdx];let shuffled=orderLearn?[...o.items]:shuffleArr([...o.items]);
+  let html='<div class="order-prompt">'+o.prompt+'</div><div class="fc-progress" style="text-align:center;margin-bottom:12px;">'+(orderIdx+1)+' / '+orderItems.length+(orderLearn?' (Learn)':' (Quiz)')+'</div><div class="order-items" id="orderList">';
+  shuffled.forEach((item,i)=>{const ci=o.items.indexOf(item);const desc=orderLearn&&o.descs&&o.descs[ci]?o.descs[ci]:'';html+='<div class="order-item'+(orderLearn?' o-correct':'')+'" data-text="'+item.replace(/"/g,'&quot;')+'"><span class="order-num">'+(i+1)+'</span><span class="order-text">'+(orderLearn?'<strong>'+item+'</strong>'+(desc?'<br><span style="font-weight:400;font-size:12px;color:#2e7d32;">'+desc+'</span>':''):item)+'</span>';if(!orderLearn)html+='<span class="arrow-btns"><button onclick="orderMove(this,-1)" type="button">\u25B2</button><button onclick="orderMove(this,1)" type="button">\u25BC</button></span>';html+='</div>';});
+  html+='</div>';
+  if(!orderLearn)html+='<div style="display:flex;gap:12px;justify-content:center;"><button class="green-btn" onclick="orderCheck()">Check</button><button class="green-btn" onclick="orderShowAnswer()" style="background:#7b2d8b;">Show Answer</button></div>';
+  html+='<div style="text-align:center;margin-top:16px;"><button class="green-btn" onclick="orderIdx++;renderOrder()">Next &rarr;</button></div>';
+  area.innerHTML=html;
+}
+function orderMove(btn,dir){const item=btn.closest('.order-item'),list=document.getElementById('orderList'),items=[...list.children],idx=items.indexOf(item);if(dir===-1&&idx>0)list.insertBefore(item,items[idx-1]);else if(dir===1&&idx<items.length-1)list.insertBefore(items[idx+1],item);[...list.children].forEach((el,i)=>el.querySelector('.order-num').textContent=i+1);}
+function orderCheck(){const o=orderItems[orderIdx],list=document.getElementById('orderList'),items=[...list.children];let ok=true;items.forEach((el,i)=>{const ci=o.items.indexOf(el.dataset.text);if(i===ci){el.classList.add('o-correct');el.classList.remove('o-wrong');}else{el.classList.add('o-wrong');el.classList.remove('o-correct');ok=false;}});if(!ok)orderShowAnswer();}
+function orderShowAnswer(){const o=orderItems[orderIdx],list=document.getElementById('orderList');if(document.getElementById('orderReveal'))return;const r=document.createElement('div');r.id='orderReveal';r.style.cssText='margin-top:16px;padding:16px;background:#fff8e1;border:2px solid #f9a825;border-radius:12px;';r.innerHTML='<div style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#795548;margin-bottom:8px;font-weight:700;">Correct order:</div>'+o.items.map((item,i)=>{const desc=o.descs&&o.descs[i]?o.descs[i]:'';return '<div style="padding:8px 12px;margin:4px 0;background:#fff;border-radius:8px;border-left:3px solid #f9a825;"><strong style="color:#1a5e3a;">'+(i+1)+'. '+item+'</strong>'+(desc?'<br><span style="font-size:12px;color:#555;">'+desc+'</span>':'')+'</div>';}).join('');list.parentNode.insertBefore(r,list.nextSibling);}
+
+/* ===== MATCHING DATA ===== */
+const MATCH_DATA = [
+  {cat:'6',term:'Anomie',def:'Norms fail to regulate behavior'},
+  {cat:'6',term:'Innovator',def:'Accepts goals, rejects traditional means'},
+  {cat:'6',term:'Retreatist',def:'Rejects both goals and means'},
+  {cat:'6',term:'Primary Deviance',def:'Initial act of rule-breaking'},
+  {cat:'6',term:'Secondary Deviance',def:'Internalizes deviant label; identity changes'},
+  {cat:'6',term:'Attachment (bond)',def:'Emotional connection to others'},
+  {cat:'6',term:'Differential Association',def:'Deviance from associating with pro-deviant people'},
+  {cat:'6',term:'Denial of the Victim',def:'"They deserved it" — neutralization technique'},
+  {cat:'6',term:'Class-Dominant Theory',def:'Dominant class defines what is deviant'},
+  {cat:'6',term:'Mandatory Minimums',def:'Required sentences driving incarceration rise'},
+  {cat:'7',term:'Stratification',def:'Society-level inequality, not just individual'},
+  {cat:'7',term:'Caste System',def:'Closed; remain at birth level for life'},
+  {cat:'7',term:'Class System',def:'Open; upward/downward mobility possible'},
+  {cat:'7',term:'Meritocracy',def:'Rewards based on merit and effort'},
+  {cat:'7',term:'Wealth',def:'Assets minus debts (net worth)'},
+  {cat:'7',term:'Food Desert',def:'Area lacking affordable, healthy food'},
+  {cat:'7',term:'Concerted Cultivation',def:'Middle-class parenting: organized activities'},
+  {cat:'7',term:'Natural Growth',def:'Working-class parenting: free play, boundaries'},
+  {cat:'8',term:'Gender',def:'Social construct — norms, roles, behaviors'},
+  {cat:'8',term:'Sex',def:'Biological/anatomical differences from genes'},
+  {cat:'8',term:'Second Shift',def:'Unpaid housework after paid employment'},
+  {cat:'8',term:'Glass Ceiling',def:'Invisible barrier to women\'s advancement'},
+  {cat:'8',term:'Glass Escalator',def:'Men\'s promotional boost in female careers'},
+  {cat:'8',term:'Doing Gender',def:'Gender as ongoing activity, not static identity'},
+  {cat:'8',term:'Double Jeopardy',def:'Discrimination on both race AND gender'},
+  {cat:'8',term:'Hegemonic Masculinity',def:'Normative male ideal: strength, domination'},
+  {cat:'9',term:'Race',def:'Physical traits deemed socially significant'},
+  {cat:'9',term:'Ethnicity',def:'Shared cultural heritage, language, origin'},
+  {cat:'9',term:'Individual Discrimination',def:'Overt, intentional unequal treatment'},
+  {cat:'9',term:'Institutional Discrimination',def:'Discrimination in law, policy, or practice'},
+  {cat:'9',term:'Redlining',def:'Refusing loans/insurance in minority areas'},
+  {cat:'9',term:'Blockbusting',def:'Exploiting racial fears for real estate profit'},
+  {cat:'9',term:'Symbolic Ethnicity',def:'Optional, consequence-free ethnic identity'},
+  {cat:'10',term:'Civil Rights',def:'Freedom WITHOUT state interference'},
+  {cat:'10',term:'Social Rights',def:'Protection BY the state (welfare, education)'},
+  {cat:'10',term:'Traditional Authority',def:'Based on long-standing traditions'},
+  {cat:'10',term:'Charismatic Authority',def:'Based on extraordinary personal qualities'},
+  {cat:'10',term:'Totalitarianism',def:'Controls ALL aspects of citizens\' lives'},
+  {cat:'10',term:'Emotional Labor',def:'Managing emotions for a wage'},
+  {cat:'10',term:'Capitalism',def:'Private ownership, market, profit motive'},
+  {cat:'10',term:'Socialism',def:'Government manages economy for workers'},
+];
+
+/* ===== MATCHING ENGINE ===== */
+let gamePairs=[],gameSelected=null,gameMatched=0,gameAttempts=0,gameTimer=0,gameInterval=null;
+function gameSetCategory(cat,btn){document.querySelectorAll('#gameCategoryBtns button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');const pool=shuffleArr(cat==='all'?[...MATCH_DATA]:MATCH_DATA.filter(m=>m.cat===cat));gamePairs=pool.slice(0,8);gameMatched=0;gameAttempts=0;gameSelected=null;gameTimer=0;if(gameInterval)clearInterval(gameInterval);gameInterval=setInterval(()=>{gameTimer++;const el=document.getElementById('gameTimerDisplay');if(el){const m=Math.floor(gameTimer/60),s=gameTimer%60;el.textContent=m+':'+(s<10?'0':'')+s;}},1000);renderGame();}
+function renderGame(){const area=document.getElementById('gameArea');const terms=shuffleArr(gamePairs.map((p,i)=>({text:p.term,idx:i})));const defs=shuffleArr(gamePairs.map((p,i)=>({text:p.def,idx:i})));let html='<div class="game-header"><div class="game-score">Matched: <span id="gameMatchCount">0</span>/'+gamePairs.length+' | Attempts: <span id="gameAttemptCount">0</span></div><div class="game-timer">Time: <span id="gameTimerDisplay">0:00</span></div><button class="green-btn" onclick="gameSetCategory(\'all\',document.querySelector(\'#gameCategoryBtns .on\'))">New Round</button></div><div class="match-grid"><div><div class="match-col-label">Terms</div>';terms.forEach(t=>{html+='<div class="match-item" data-type="term" data-idx="'+t.idx+'" onclick="gameSelect(this)">'+t.text+'</div>';});html+='</div><div><div class="match-col-label">Definitions</div>';defs.forEach(d=>{html+='<div class="match-item" data-type="def" data-idx="'+d.idx+'" onclick="gameSelect(this)">'+d.text+'</div>';});html+='</div></div>';area.innerHTML=html;}
+function gameSelect(el){if(el.classList.contains('correct'))return;const type=el.dataset.type,idx=parseInt(el.dataset.idx);if(!gameSelected){gameSelected={el,type,idx};el.classList.add('selected');return;}if(type===gameSelected.type){gameSelected.el.classList.remove('selected');gameSelected={el,type,idx};el.classList.add('selected');return;}gameAttempts++;document.getElementById('gameAttemptCount').textContent=gameAttempts;if(idx===gameSelected.idx){el.classList.add('correct');gameSelected.el.classList.add('correct');gameSelected.el.classList.remove('selected');gameSelected=null;gameMatched++;document.getElementById('gameMatchCount').textContent=gameMatched;if(gameMatched===gamePairs.length){clearInterval(gameInterval);setTimeout(()=>{const m=Math.floor(gameTimer/60),s=gameTimer%60;document.getElementById('gameArea').innerHTML='<div class="game-complete"><h2>All Matched!</h2><div class="final-score">'+gameAttempts+' attempts</div><p>Time: '+m+':'+(s<10?'0':'')+s+'</p><br><button class="green-btn" onclick="gameSetCategory(\'all\',document.querySelector(\'#gameCategoryBtns .on\'))">Play Again</button></div>';},400);}}else{el.classList.add('wrong');gameSelected.el.classList.add('wrong');const prev=gameSelected.el;setTimeout(()=>{el.classList.remove('wrong');prev.classList.remove('wrong');prev.classList.remove('selected');},600);gameSelected=null;}}
+
+/* ===== MEMORY CARD GAME ===== */
+const MEM_DATA = [
+  {cat:'6',term:'Anomie',def:'Norms fail to regulate behavior'},
+  {cat:'6',term:'Primary Deviance',def:'Initial rule-breaking act'},
+  {cat:'6',term:'Secondary Deviance',def:'Internalizes deviant label'},
+  {cat:'6',term:'Innovator',def:'Accepts goals, new means'},
+  {cat:'6',term:'Social Bond',def:'Attachment, commitment, involvement, belief'},
+  {cat:'6',term:'Neutralization',def:'Rationalizing deviant behavior'},
+  {cat:'7',term:'Stratification',def:'Society-level inequality'},
+  {cat:'7',term:'Meritocracy',def:'Rewards based on merit'},
+  {cat:'7',term:'Food Desert',def:'No affordable healthy food'},
+  {cat:'7',term:'Wealth',def:'Assets minus debts'},
+  {cat:'8',term:'Glass Ceiling',def:'Barrier to women\'s advancement'},
+  {cat:'8',term:'Glass Escalator',def:'Men boosted in female careers'},
+  {cat:'8',term:'Second Shift',def:'Unpaid housework after work'},
+  {cat:'8',term:'Doing Gender',def:'Gender as ongoing activity'},
+  {cat:'8',term:'Hegemonic Masculinity',def:'Strength, domination ideal'},
+  {cat:'9',term:'Redlining',def:'Refusing loans in minority areas'},
+  {cat:'9',term:'Thomas Theorem',def:'Defined as real = real consequences'},
+  {cat:'9',term:'Symbolic Ethnicity',def:'Optional ethnic identity'},
+  {cat:'10',term:'Civil Rights',def:'Freedom WITHOUT state'},
+  {cat:'10',term:'Social Rights',def:'Protection BY state'},
+  {cat:'10',term:'Emotional Labor',def:'Managing emotions for wage'},
+  {cat:'10',term:'Power Elite',def:'Gov + business + military revolving door'},
+  {cat:'10',term:'Totalitarianism',def:'Controls ALL of citizens\' lives'},
+  {cat:'10',term:'Charismatic Authority',def:'Based on personal qualities'},
+];
+let memPairs=[],memFlipped=[],memMatched=0,memMoves=0,memLocked=false;
+function memSetCat(cat,btn){document.querySelectorAll('#memCatBtns button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');const pool=shuffleArr(cat==='all'?[...MEM_DATA]:MEM_DATA.filter(m=>m.cat===cat)).slice(0,8);memPairs=pool;memFlipped=[];memMatched=0;memMoves=0;memLocked=false;renderMem();}
+function renderMem(){const cards=[];memPairs.forEach((p,i)=>{cards.push({id:i,type:'term',text:p.term});cards.push({id:i,type:'def',text:p.def});});shuffleArr(cards);const grid=document.getElementById('memGrid');grid.innerHTML=cards.map((c,i)=>'<div class="mem-card" data-id="'+c.id+'" data-ci="'+i+'" onclick="memFlip(this)"><div class="mem-card-inner"><div class="mem-card-face mem-card-front">?</div><div class="mem-card-face mem-card-back">'+c.text+'</div></div></div>').join('');document.getElementById('memProgress').textContent='Pairs: 0/'+memPairs.length;document.getElementById('memMoves').textContent='Moves: 0';}
+function memFlip(el){if(memLocked||el.classList.contains('mem-flipped')||el.classList.contains('mem-matched'))return;el.classList.add('mem-flipped');memFlipped.push(el);if(memFlipped.length===2){memMoves++;document.getElementById('memMoves').textContent='Moves: '+memMoves;memLocked=true;const a=memFlipped[0],b=memFlipped[1];if(a.dataset.id===b.dataset.id&&a.dataset.ci!==b.dataset.ci){a.classList.add('mem-matched');b.classList.add('mem-matched');memMatched++;document.getElementById('memProgress').textContent='Pairs: '+memMatched+'/'+memPairs.length;memFlipped=[];memLocked=false;if(memMatched===memPairs.length)setTimeout(()=>alert('Matched all '+memPairs.length+' pairs in '+memMoves+' moves!'),300);}else{setTimeout(()=>{a.classList.remove('mem-flipped');b.classList.remove('mem-flipped');memFlipped=[];memLocked=false;},800);}}}
+
+/* ===== FILL IN THE BLANK ===== */
+const FITB_DATA = [
+  {cat:'6',sentence:'Social deviance is ___ and relativist — it differs across place and time.',blank:'normative',accept:['normative']},
+  {cat:'6',sentence:'A state in which society\'s norms fail to regulate behavior is called ___.',blank:'anomie',accept:['anomie']},
+  {cat:'6',sentence:'In Merton\'s strain theory, someone who accepts goals but rejects means is an ___.',blank:'innovator',accept:['innovator']},
+  {cat:'6',sentence:'Hirschi\'s theory focuses on four social ___ that prevent crime.',blank:'bonds',accept:['bonds','bond']},
+  {cat:'6',sentence:'When someone internalizes a deviant label, this is called ___ deviance.',blank:'secondary',accept:['secondary']},
+  {cat:'6',sentence:'Deviant behavior from associating with pro-deviant people is called ___ association theory.',blank:'differential',accept:['differential']},
+  {cat:'6',sentence:'"No one was hurt" is an example of denial of ___.',blank:'injury',accept:['injury']},
+  {cat:'7',sentence:'In a ___ society, social levels are closed and people remain at birth level for life.',blank:'caste',accept:['caste']},
+  {cat:'7',sentence:'A system where rewards are based on merit and effort is called a ___.',blank:'meritocracy',accept:['meritocracy']},
+  {cat:'7',sentence:'___ is assets minus debts (net worth).',blank:'wealth',accept:['wealth']},
+  {cat:'7',sentence:'Areas lacking access to affordable, healthy food are called food ___.',blank:'deserts',accept:['deserts','desert']},
+  {cat:'7',sentence:'Lareau\'s middle-class parenting style is called concerted ___.',blank:'cultivation',accept:['cultivation']},
+  {cat:'8',sentence:'___ is a social construct linked to norms, roles, and behaviors.',blank:'gender',accept:['gender']},
+  {cat:'8',sentence:'The unpaid housework women do after paid employment is called the ___ shift.',blank:'second',accept:['second']},
+  {cat:'8',sentence:'The invisible barrier to women\'s advancement is the glass ___.',blank:'ceiling',accept:['ceiling']},
+  {cat:'8',sentence:'The promotional boost men get in female-dominated careers is the glass ___.',blank:'escalator',accept:['escalator']},
+  {cat:'8',sentence:'Women of color facing discrimination on both race and gender is called double ___.',blank:'jeopardy',accept:['jeopardy']},
+  {cat:'8',sentence:'West and Zimmerman argue gender is an activity, not an identity — this is called ___ gender.',blank:'doing',accept:['doing']},
+  {cat:'9',sentence:'Race is a ___ construct, not a scientific one.',blank:'social',accept:['social']},
+  {cat:'9',sentence:'Refusing loans or insurance in minority neighborhoods is called ___.',blank:'redlining',accept:['redlining','red-lining']},
+  {cat:'9',sentence:'For white Americans, ethnicity is often optional and ___ (consequence-free).',blank:'symbolic',accept:['symbolic']},
+  {cat:'9',sentence:'Discrimination enshrined in law, policy, or practice is called ___ discrimination.',blank:'institutional',accept:['institutional','institutionalized']},
+  {cat:'10',sentence:'___ rights guarantee personal freedom without state interference.',blank:'civil',accept:['civil']},
+  {cat:'10',sentence:'___ rights guarantee protection by the state (education, healthcare).',blank:'social',accept:['social']},
+  {cat:'10',sentence:'Managing emotions for a public display in return for a wage is called ___ labor.',blank:'emotional',accept:['emotional']},
+  {cat:'10',sentence:'The transfer of charismatic authority into permanent institutions is called ___ of charisma.',blank:'routinization',accept:['routinization']},
+  {cat:'10',sentence:'A system that denies participation AND controls all aspects of life is ___.',blank:'totalitarianism',accept:['totalitarianism','totalitarian']},
+];
+
+let fitbItems=[],fitbIdx=0,fitbCorrect=0,fitbWrong=0,fitbAnswered=false;
+function fitbSetCat(cat,btn){document.querySelectorAll('#fitbCatBtns button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');fitbItems=shuffleArr(cat==='all'?[...FITB_DATA]:FITB_DATA.filter(f=>f.cat===cat));fitbIdx=0;fitbCorrect=0;fitbWrong=0;fitbAnswered=false;renderFitb();}
+function fitbRestart(){shuffleArr(fitbItems);fitbIdx=0;fitbCorrect=0;fitbWrong=0;fitbAnswered=false;renderFitb();}
+function renderFitb(){
+  if(fitbIdx>=fitbItems.length){document.getElementById('fitbSentence').innerHTML='<div style="text-align:center;font-size:20px;font-weight:700;color:#1a5e3a;">All done! '+fitbCorrect+' correct out of '+(fitbCorrect+fitbWrong)+'</div>';document.getElementById('fitbInput').style.display='none';document.getElementById('fitbCheckBtn').style.display='none';document.getElementById('fitbNextBtn').style.display='none';document.getElementById('fitbFeedback').className='fitb-feedback';return;}
+  const f=fitbItems[fitbIdx];const isRetry=f._retry;
+  document.getElementById('fitbSentence').innerHTML=(isRetry?'<div style="font-size:12px;color:#e65100;font-weight:600;margin-bottom:8px;">RETRY</div>':'')+f.sentence.replace('___','<span class="fitb-blank">___</span>');
+  document.getElementById('fitbInput').value='';document.getElementById('fitbInput').style.display='';document.getElementById('fitbCheckBtn').style.display='';document.getElementById('fitbCheckBtn').disabled=false;document.getElementById('fitbNextBtn').style.display='';document.getElementById('fitbNextBtn').disabled=true;document.getElementById('fitbFeedback').className='fitb-feedback';document.getElementById('fitbFeedback').textContent='';document.getElementById('fitbProgress').textContent=(fitbIdx+1)+' / '+fitbItems.length;document.getElementById('fitbScore').textContent='Correct: '+fitbCorrect+' | Wrong: '+fitbWrong;fitbAnswered=false;document.getElementById('fitbInput').focus();
+}
+function fitbCheck(){if(fitbAnswered)return;fitbAnswered=true;const f=fitbItems[fitbIdx];const ua=document.getElementById('fitbInput').value.trim().toLowerCase();const ok=f.accept.some(a=>a.toLowerCase()===ua);const fb=document.getElementById('fitbFeedback');if(ok){fitbCorrect++;fb.className='fitb-feedback fb-correct';fb.textContent='\u2713 Correct! '+f.blank;}else{fitbWrong++;fb.className='fitb-feedback fb-wrong';fb.textContent='\u2717 Answer: '+f.blank;fitbItems.push({...f,_retry:true});}document.getElementById('fitbScore').textContent='Correct: '+fitbCorrect+' | Wrong: '+fitbWrong;document.getElementById('fitbCheckBtn').disabled=true;document.getElementById('fitbNextBtn').disabled=false;}
+function fitbNext(){fitbIdx++;renderFitb();}
+document.addEventListener('keydown',e=>{if(document.getElementById('fitb').classList.contains('active')&&e.key==='Enter'){if(!fitbAnswered)fitbCheck();else fitbNext();}});
+
+/* ===== SCENARIO DATA ===== */
+const SCENARIO_DATA = [
+  {cat:'6',scenario:'A college student cheats on an exam and justifies it by saying "Everyone else does it, and the professor is unfair anyway."',q:'Which techniques of neutralization is the student using?',opts:['Denial of responsibility and denial of injury','Condemnation of condemners and appeal to higher loyalties','Denial of responsibility and condemnation of condemners','Denial of the victim and appeal to higher loyalties'],ans:2,exp:'"Everyone does it" shifts responsibility, and "the professor is unfair" condemns the condemner.'},
+  {cat:'6',scenario:'A teenager gets caught shoplifting. The store publicizes the arrest, peers begin calling them a "thief," and the teen starts to see themselves as a criminal and shoplifts more frequently.',q:'What sociological concept best explains this progression?',opts:['Strain theory','Social bond theory','Secondary deviance (labeling theory)','Differential association'],ans:2,exp:'The teen was labeled deviant, internalized it, and the label produced further deviance — classic secondary deviance.'},
+  {cat:'6',scenario:'A researcher notices that despite similar rates of marijuana use across racial groups, Black Americans are arrested for possession at nearly 4x the rate of whites.',q:'Which concept best explains this disparity?',opts:['Differential association theory','Formal social control applied equally','Over-policing and institutional discrimination','Anomie'],ans:2,exp:'Over-policing of minority neighborhoods + institutional discrimination in the criminal justice system.'},
+  {cat:'7',scenario:'A child grows up in a wealthy family, attends private schools, has access to tutors and extracurricular activities, and eventually attends an elite university. Their parents say, "They earned it through hard work."',q:'What sociological concept challenges this interpretation?',opts:['Meritocracy is accurate here','Critiques of Davis & Moore — privilege limits talent discovery','Caste system','Concerted cultivation benefits are earned'],ans:1,exp:'Those born to privilege get fuller opportunities. Merit alone doesn\'t explain outcomes when the playing field is uneven.'},
+  {cat:'7',scenario:'Two families live in the same city. The Smith family schedules piano, soccer, and math tutoring for their children. The Jones family lets their children play freely in the neighborhood after school.',q:'According to Lareau, which parenting styles are these?',opts:['Both are natural growth','Smiths: natural growth; Jones: concerted cultivation','Smiths: concerted cultivation; Jones: natural growth','Both are concerted cultivation'],ans:2,exp:'Concerted cultivation (organized activities) = middle/upper class. Natural growth (free play) = working class.'},
+  {cat:'8',scenario:'A male nurse receives his third promotion in five years, advancing to head of the department faster than his female colleagues with more seniority.',q:'What concept best explains this?',opts:['Gender wage gap','Glass ceiling','Glass escalator','Doing gender'],ans:2,exp:'Glass escalator = men in female-dominated careers receive nearly invisible promotional boosts.'},
+  {cat:'8',scenario:'A couple describes themselves as egalitarian, but after marriage, the wife ends up doing most of the cooking, cleaning, and childcare despite both working full time.',q:'Which TWO concepts from chapter 8 are illustrated here?',opts:['Glass ceiling and glass escalator','Second shift and traditionalizing effect of marriage','Doing gender and social dosage effect','Roots and wings'],ans:1,exp:'The second shift (unpaid housework) and marriage\'s traditionalizing effect, even in self-described egalitarian couples.'},
+  {cat:'9',scenario:'In 1922, Takao Ozawa argued he should be considered white because his skin was literally white. The Supreme Court denied him, saying race is based on scientific classification (Caucasian). A year later, Bhagat Singh Thind, who WAS classified as Caucasian, was also denied — the Court said race is based on "common understanding."',q:'What do these cases demonstrate?',opts:['Race has a consistent scientific basis','The courts applied fair, consistent standards','Race is a social construct with arbitrary legal definitions','Ethnicity and race are the same thing'],ans:2,exp:'The courts contradicted themselves, showing race categories are socially constructed, not objectively defined.'},
+  {cat:'9',scenario:'A well-meaning teacher says "I don\'t see color — I treat all my students exactly the same." A colleague argues this approach is actually problematic.',q:'Why is the color-blind approach problematic?',opts:['It promotes active discrimination','It ignores systemic inequalities that affect students differently','It is illegal in schools','MLK advocated for color-blindness'],ans:1,exp:'Ignoring race ignores the systemic barriers minority students face. Equality requires acknowledging inequality first.'},
+  {cat:'10',scenario:'A flight attendant must smile warmly and remain calm and cheerful even when passengers are rude and demanding. At the end of a 12-hour shift, they feel emotionally drained.',q:'What sociological concept describes this worker\'s experience?',opts:['Alienation','Emotional labor','Glass ceiling','Second shift'],ans:1,exp:'Emotional labor = managing feelings to create a public display in return for a wage.'},
+  {cat:'10',scenario:'A political leader with no formal legal claim to power inspires millions through personal charisma. After the leader dies, their followers create a formal organization with written rules to preserve the movement.',q:'What process is described in the second sentence?',opts:['Rational-legal authority','Traditional authority','Routinization of charisma','Totalitarianism'],ans:2,exp:'Routinization of charisma = transferring charismatic authority into permanent institutions.'},
+  {cat:'10',scenario:'In Country X, citizens cannot vote, the government controls all media, opposition parties are outlawed, and the state monitors citizens\' private conversations.',q:'What system of governance is this?',opts:['Authoritarianism','Democracy','Socialism','Totalitarianism'],ans:3,exp:'Totalitarianism denies participation AND controls ALL aspects of life. Authoritarianism denies participation but doesn\'t control every aspect.'},
+];
+
+let scenItems=[],scenIdx=0,scenCorrect=0,scenAnswered=false,scenMissed=[],scenRound=1,scenTotalCorrect=0,scenTotalSeen=0;
+function scenSetCat(cat,btn){document.querySelectorAll('#scenCatBtns button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');scenItems=shuffleArr(cat==='all'?[...SCENARIO_DATA]:SCENARIO_DATA.filter(s=>s.cat===cat));scenIdx=0;scenCorrect=0;scenAnswered=false;scenMissed=[];scenRound=1;scenTotalCorrect=0;scenTotalSeen=0;renderScen();}
+function scenRestart(){const c=document.querySelector('#scenCatBtns .on');if(c)scenSetCat(c.textContent==='All Topics'?'all':c.onclick.toString().match(/'(\w+)'/)[1],c);}
+function renderScen(){
+  const area=document.getElementById('scenArea');
+  if(scenIdx>=scenItems.length){scenTotalSeen+=scenItems.length;scenTotalCorrect+=scenCorrect;if(scenMissed.length>0){const mc=scenMissed.length;scenRound++;scenItems=shuffleArr([...scenMissed]);scenMissed=[];scenIdx=0;scenCorrect=0;scenAnswered=false;area.innerHTML='<div class="game-complete"><h2>Round '+(scenRound-1)+' Complete</h2><p>Missed '+mc+'. Let\u2019s retry!</p><br><button class="green-btn" onclick="renderScen()">Continue &rarr;</button></div>';return;}const pct=Math.round(scenTotalCorrect/scenTotalSeen*100);area.innerHTML='<div class="game-complete"><h2>\u2713 All Mastered!</h2><div class="final-score">'+scenTotalCorrect+'/'+scenTotalSeen+' ('+pct+'%)</div></div>';return;}
+  const s=scenItems[scenIdx];let html='<div class="quiz-progress">Scenario '+(scenIdx+1)+'/'+scenItems.length+'</div><div class="scenario-box">'+s.scenario+'</div><div class="quiz-q">'+s.q+'</div><div class="quiz-options">';
+  s.opts.forEach((opt,i)=>{html+='<div class="quiz-opt" onclick="scenAnswer('+i+')">'+String.fromCharCode(65+i)+'. '+opt+'</div>';});
+  html+='</div><div class="quiz-explanation" id="scenExp">'+s.exp+'</div><div class="quiz-nav"><button class="green-btn" onclick="scenNext()" id="scenNextBtn" disabled>Next &rarr;</button></div>';area.innerHTML=html;scenAnswered=false;
+}
+function scenAnswer(idx){if(scenAnswered)return;scenAnswered=true;const s=scenItems[scenIdx];const opts=document.querySelectorAll('#scenArea .quiz-opt');opts[idx].classList.add(idx===s.ans?'q-correct':'q-wrong');opts[s.ans].classList.add('q-correct');if(idx===s.ans)scenCorrect++;else scenMissed.push(s);document.getElementById('scenExp').classList.add('show');document.getElementById('scenNextBtn').disabled=false;}
+function scenNext(){scenIdx++;renderScen();}
+
+/* ===== SPEED ROUND ===== */
+function tfToMC(t){return{cat:t.cat,q:t.s,opts:['True','False'],ans:t.ans?0:1,exp:t.exp};}
+let speedPool=[],speedIdx=0,speedCorrect=0,speedAttempted=0,speedTimerInterval=null,speedTimeLeft=60,speedActive=false;
+function speedSetCat(cat,btn){document.querySelectorAll('#speedCatBtns button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');const mc=cat==='all'?[...QUIZ_DATA]:QUIZ_DATA.filter(q=>q.cat===cat);const tf=(cat==='all'?[...TF_DATA]:TF_DATA.filter(t=>t.cat===cat)).map(tfToMC);speedPool=shuffleArr([...mc,...tf]);speedIdx=0;speedCorrect=0;speedAttempted=0;speedTimeLeft=60;speedActive=false;if(speedTimerInterval){clearInterval(speedTimerInterval);speedTimerInterval=null;}renderSpeedStart();}
+function renderSpeedStart(){document.getElementById('speedArea').innerHTML='<div class="speed-start-screen"><h2>Speed Round</h2><p>Answer as many as you can in 60 seconds!</p><br><button class="green-btn" onclick="speedStart()" style="padding:16px 48px;font-size:18px;">Start!</button></div>';}
+function speedStart(){speedActive=true;speedTimeLeft=60;speedIdx=0;speedCorrect=0;speedAttempted=0;speedTimerInterval=setInterval(()=>{speedTimeLeft--;const el=document.getElementById('speedTimerDisplay');if(el){el.textContent=speedTimeLeft;el.className='speed-timer'+(speedTimeLeft<=10?' danger':speedTimeLeft<=20?' warning':'');}if(speedTimeLeft<=0){clearInterval(speedTimerInterval);speedTimerInterval=null;speedActive=false;renderSpeedResults();}},1000);renderSpeedQ();}
+function renderSpeedQ(){if(!speedActive)return;if(speedIdx>=speedPool.length){shuffleArr(speedPool);speedIdx=0;}const q=speedPool[speedIdx];let html='<div class="speed-timer" id="speedTimerDisplay">'+speedTimeLeft+'</div><div style="text-align:center;margin-bottom:8px;"><span class="fc-score">Correct: '+speedCorrect+' | Attempted: '+speedAttempted+'</span></div><div class="quiz-q" style="text-align:center;">'+q.q+'</div><div class="quiz-options" style="max-width:600px;margin:0 auto;">';q.opts.forEach((opt,i)=>{html+='<div class="quiz-opt" onclick="speedAnswer('+i+')">'+String.fromCharCode(65+i)+'. '+opt+'</div>';});html+='</div>';document.getElementById('speedArea').innerHTML=html;}
+function speedAnswer(idx){if(!speedActive)return;speedAttempted++;const q=speedPool[speedIdx];const ok=idx===q.ans;if(ok)speedCorrect++;const flash=document.getElementById('speedFlash');flash.className='speed-flash '+(ok?'flash-correct':'flash-wrong');setTimeout(()=>{flash.className='speed-flash';},300);speedIdx++;setTimeout(()=>{if(speedActive)renderSpeedQ();},400);}
+function renderSpeedResults(){const pct=speedAttempted>0?Math.round(speedCorrect/speedAttempted*100):0;document.getElementById('speedArea').innerHTML='<div class="speed-results"><h2>Time\'s Up!</h2><div class="speed-big">'+speedCorrect+'</div><p style="color:#555;font-size:16px;margin-bottom:16px;">correct answers</p><div class="speed-stat-row"><div class="speed-stat"><div class="stat-num">'+speedAttempted+'</div><div class="stat-label">Attempted</div></div><div class="speed-stat"><div class="stat-num">'+pct+'%</div><div class="stat-label">Accuracy</div></div></div><br><button class="green-btn" onclick="speedStart()" style="padding:14px 40px;font-size:16px;">Play Again</button></div>';}
+
+/* ===== FULL TEST ENGINE ===== */
+let testQuestions=[],testAnswers={},testSubmitted=false;
+function testGenerate(){
+  testSubmitted=false;testAnswers={};
+  const mcPool=shuffleArr([...QUIZ_DATA]).slice(0,10);
+  const tfPool=shuffleArr([...TF_DATA]).slice(0,5).map(t=>({cat:t.cat,q:t.s,opts:['True','False'],ans:t.ans?0:1,exp:t.exp,type:'tf'}));
+  const fitbPool=shuffleArr([...FITB_DATA]).slice(0,5).map(f=>({...f,type:'fitb'}));
+  testQuestions=[...mcPool.map(q=>({...q,type:'mc'})),...tfPool,...fitbPool];
+  shuffleArr(testQuestions);
+  const area=document.getElementById('testArea');let html='';
+  testQuestions.forEach((q,i)=>{
+    html+='<div class="test-q-block" id="tq'+i+'"><div class="test-q-num">'+(q.type==='tf'?'True/False':q.type==='fitb'?'Fill in the Blank':'Multiple Choice')+' &mdash; Question '+(i+1)+'</div>';
+    if(q.type==='fitb'){
+      html+='<div class="test-q-text">'+q.sentence.replace('___','<span style="background:#fde68a;padding:2px 16px;border-radius:4px;font-weight:700;">___</span>')+'</div>';
+      html+='<input type="text" class="test-fitb-input" data-qi="'+i+'" placeholder="Type answer..." style="width:100%;padding:10px 14px;border:2px solid #e5e7eb;border-radius:8px;font-size:14px;margin-top:8px;">';
+    } else {
+      html+='<div class="test-q-text">'+q.q+'</div><div class="test-opts">';
+      q.opts.forEach((opt,j)=>{html+='<div class="test-opt" data-qi="'+i+'" data-oi="'+j+'" onclick="testSelect('+i+','+j+')">'+String.fromCharCode(65+j)+'. '+opt+'</div>';});
+      html+='</div>';
+    }
+    html+='<div class="test-exp" id="texp'+i+'">'+(q.exp||'Answer: '+q.blank)+'</div></div>';
+  });
+  area.innerHTML=html;document.getElementById('testSubmitBtn').disabled=false;document.getElementById('testSummary').innerHTML='';
+}
+function testSelect(qi,oi){if(testSubmitted)return;testAnswers[qi]=oi;document.querySelectorAll('[data-qi="'+qi+'"].test-opt').forEach(el=>{el.classList.toggle('t-selected',parseInt(el.dataset.oi)===oi);});}
+function testSubmit(){
+  testSubmitted=true;let correct=0;
+  testQuestions.forEach((q,i)=>{
+    if(q.type==='fitb'){
+      const input=document.querySelector('.test-fitb-input[data-qi="'+i+'"]');
+      const ua=(input?input.value.trim().toLowerCase():'');
+      const ok=q.accept.some(a=>a.toLowerCase()===ua);
+      if(ok){correct++;input.style.borderColor='#3d7a5f';input.style.background='#e8f0ec';}else{input.style.borderColor='var(--rose)';input.style.background='#f5e6e7';}
+    } else {
+      const ans=testAnswers[i];
+      document.querySelectorAll('[data-qi="'+i+'"].test-opt').forEach(el=>{const oi=parseInt(el.dataset.oi);if(oi===q.ans)el.classList.add('t-correct');if(oi===ans&&ans!==q.ans)el.classList.add('t-wrong');});
+      if(ans===q.ans)correct++;
+    }
+    document.getElementById('texp'+i).classList.add('show');
+  });
+  const total=testQuestions.length;const pct=Math.round(correct/total*100);
+  let grade,gc;if(pct>=90){grade='A';gc='grade-a';}else if(pct>=80){grade='B';gc='grade-b';}else if(pct>=70){grade='C';gc='grade-c';}else{grade='F';gc='grade-f';}
+  document.getElementById('testSummary').innerHTML='<div class="test-summary"><h2>Test Results</h2><div class="big-score">'+correct+' / '+total+'</div><div class="test-grade '+gc+'">'+pct+'% &mdash; '+grade+'</div></div>';
+  document.getElementById('testSubmitBtn').disabled=true;
+}
+
+/* ===== INIT ===== */
+fcRender();
+quizSetCategory('all',document.querySelector('#quizCategoryBtns .on'));
+tfSetCat('all',document.querySelector('#tfCatBtns .on'));
+orderSetCat('all',document.querySelector('#orderCatBtns .on'));
+gameSetCategory('all',document.querySelector('#gameCategoryBtns .on'));
+memSetCat('all',document.querySelector('#memCatBtns .on'));
+fitbSetCat('all',document.querySelector('#fitbCatBtns .on'));
+scenSetCat('all',document.querySelector('#scenCatBtns .on'));
+speedSetCat('all',document.querySelector('#speedCatBtns .on'));
+testGenerate();
+</script>
+</body>
+</html>
